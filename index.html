@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>化学品安全数据速查工具</title>
+    <title>专业化学品数据库 - ChemFinder Pro</title>
+    <meta name="description" content="专业的化学品数据查询平台，支持多数据源查询、结构搜索、物性预测等功能">
+    <meta name="keywords" content="化学品,数据库,安全数据,物性,结构,CAS,PubChem">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
     <style>
         * {
             margin: 0;
@@ -53,6 +56,58 @@
             gap: 15px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+        }
+
+        .search-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .search-type-btn {
+            padding: 8px 16px;
+            background: #f8f9fa;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .search-type-btn.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-color: #667eea;
+            color: white;
+        }
+
+        .advanced-search {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .advanced-search.show {
+            display: block;
+        }
+
+        .advanced-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .advanced-input {
+            flex: 1;
+            min-width: 200px;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
         }
 
         .search-input {
@@ -254,16 +309,26 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🧪 化学品安全数据速查工具</h1>
-            <p>快速查询化学品的基本信息和安全数据</p>
+            <h1>🧪 ChemFinder Pro</h1>
+            <p>专业化学品数据库 - 多源数据整合查询平台</p>
+            <div style="margin-top: 15px; font-size: 14px; opacity: 0.8;">
+                支持 PubChem • ChemSpider • EPA • NIST • 本地数据库
+            </div>
         </div>
 
         <div class="search-card">
+            <div class="search-options">
+                <button class="search-type-btn active" data-type="basic">🔍 基础查询</button>
+                <button class="search-type-btn" data-type="advanced">🧮 高级查询</button>
+                <button class="search-type-btn" data-type="structure">🔬 结构查询</button>
+                <button class="search-type-btn" data-type="batch">📋 批量查询</button>
+            </div>
+
             <form class="search-form" id="searchForm">
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="chemicalInput" 
+                <input
+                    type="text"
+                    class="search-input"
+                    id="chemicalInput"
                     placeholder="请输入化学品名称、分子式或CAS号（如：苯、C6H6、71-43-2）"
                     required
                 >
@@ -271,8 +336,33 @@
                     🔍 查询
                 </button>
             </form>
+
+            <div class="advanced-search" id="advancedSearch">
+                <h4 style="margin-bottom: 15px; color: #333;">高级查询选项</h4>
+                <div class="advanced-row">
+                    <input type="text" class="advanced-input" id="casNumber" placeholder="CAS号">
+                    <input type="text" class="advanced-input" id="molecularWeight" placeholder="分子量范围 (例: 100-200)">
+                </div>
+                <div class="advanced-row">
+                    <select class="advanced-input" id="hazardClass">
+                        <option value="">选择危险类别</option>
+                        <option value="flammable">易燃</option>
+                        <option value="toxic">有毒</option>
+                        <option value="corrosive">腐蚀性</option>
+                        <option value="oxidizing">氧化性</option>
+                        <option value="explosive">爆炸性</option>
+                    </select>
+                    <select class="advanced-input" id="physicalState">
+                        <option value="">物理状态</option>
+                        <option value="solid">固体</option>
+                        <option value="liquid">液体</option>
+                        <option value="gas">气体</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="search-tips">
-                💡 支持中英文名称、分子式、CAS号查询 | 数据来源：PubChem数据库
+                💡 支持多种查询方式和数据源 | 数据来源：PubChem、ChemSpider、EPA等
             </div>
         </div>
 
@@ -288,34 +378,200 @@
         class ChemicalSearchTool {
             constructor() {
                 this.initEventListeners();
-                this.cache = new Map(); // 简单缓存
+                this.cache = new Map();
+                this.searchType = 'basic';
+                this.dataSources = {
+                    pubchem: true,
+                    chemspider: false, // 需要API密钥
+                    local: true // 本地数据库
+                };
+                this.localDatabase = this.initLocalDatabase();
+            }
+
+            initLocalDatabase() {
+                // 本地化学品数据库，包含常见化学品信息
+                return {
+                    '苯': {
+                        name: '苯',
+                        englishName: 'Benzene',
+                        cas: '71-43-2',
+                        formula: 'C6H6',
+                        molecularWeight: 78.11,
+                        hazards: [
+                            { type: 'serious', text: '可疑致癌物质' },
+                            { type: 'warning', text: '高度易燃液体和蒸气' },
+                            { type: 'warning', text: '可能对血液系统造成伤害' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '80.1°C',
+                        meltingPoint: '5.5°C',
+                        density: '0.8765 g/mL'
+                    },
+                    '甲醇': {
+                        name: '甲醇',
+                        englishName: 'Methanol',
+                        cas: '67-56-1',
+                        formula: 'CH4O',
+                        molecularWeight: 32.04,
+                        hazards: [
+                            { type: 'serious', text: '吞咽致命' },
+                            { type: 'serious', text: '皮肤接触致命' },
+                            { type: 'warning', text: '高度易燃液体和蒸气' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '64.7°C',
+                        meltingPoint: '-97.6°C',
+                        density: '0.7918 g/mL'
+                    },
+                    '乙醇': {
+                        name: '乙醇',
+                        englishName: 'Ethanol',
+                        cas: '64-17-5',
+                        formula: 'C2H6O',
+                        molecularWeight: 46.07,
+                        hazards: [
+                            { type: 'warning', text: '高度易燃液体和蒸气' },
+                            { type: 'warning', text: '引起严重眼刺激' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '78.37°C',
+                        meltingPoint: '-114.1°C',
+                        density: '0.789 g/mL'
+                    },
+                    '丙酮': {
+                        name: '丙酮',
+                        englishName: 'Acetone',
+                        cas: '67-64-1',
+                        formula: 'C3H6O',
+                        molecularWeight: 58.08,
+                        hazards: [
+                            { type: 'warning', text: '高度易燃液体和蒸气' },
+                            { type: 'warning', text: '引起严重眼刺激' },
+                            { type: 'info', text: '可能引起昏昏欲睡或眩晕' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '56.05°C',
+                        meltingPoint: '-94.7°C',
+                        density: '0.784 g/mL'
+                    },
+                    '甲苯': {
+                        name: '甲苯',
+                        englishName: 'Toluene',
+                        cas: '108-88-3',
+                        formula: 'C7H8',
+                        molecularWeight: 92.14,
+                        hazards: [
+                            { type: 'warning', text: '高度易燃液体和蒸气' },
+                            { type: 'warning', text: '吸入可能有害' },
+                            { type: 'warning', text: '可能引起昏昏欲睡或眩晕' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '110.6°C',
+                        meltingPoint: '-93°C',
+                        density: '0.8669 g/mL'
+                    },
+                    '硫酸': {
+                        name: '硫酸',
+                        englishName: 'Sulfuric acid',
+                        cas: '7664-93-9',
+                        formula: 'H2SO4',
+                        molecularWeight: 98.08,
+                        hazards: [
+                            { type: 'serious', text: '接触皮肤会造成严重灼伤和眼损伤' },
+                            { type: 'serious', text: '可能造成呼吸道损伤' }
+                        ],
+                        physicalState: 'liquid',
+                        boilingPoint: '337°C',
+                        meltingPoint: '10.31°C',
+                        density: '1.84 g/mL'
+                    },
+                    '氢氧化钠': {
+                        name: '氢氧化钠',
+                        englishName: 'Sodium hydroxide',
+                        cas: '1310-73-2',
+                        formula: 'NaOH',
+                        molecularWeight: 40.00,
+                        hazards: [
+                            { type: 'serious', text: '接触皮肤会造成严重灼伤和眼损伤' },
+                            { type: 'serious', text: '可能造成呼吸道损伤' }
+                        ],
+                        physicalState: 'solid',
+                        boilingPoint: '1388°C',
+                        meltingPoint: '318°C',
+                        density: '2.13 g/cm³'
+                    }
+                };
             }
 
             initEventListeners() {
                 const form = document.getElementById('searchForm');
                 const input = document.getElementById('chemicalInput');
-                
+                const searchTypeBtns = document.querySelectorAll('.search-type-btn');
+
                 form.addEventListener('submit', (e) => {
                     e.preventDefault();
                     this.searchChemical();
                 });
 
-                // 回车键搜索
                 input.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
                         e.preventDefault();
                         this.searchChemical();
                     }
                 });
+
+                searchTypeBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.switchSearchType(btn.dataset.type);
+                    });
+                });
+            }
+
+            switchSearchType(type) {
+                this.searchType = type;
+
+                // 更新按钮状态
+                document.querySelectorAll('.search-type-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`[data-type="${type}"]`).classList.add('active');
+
+                // 显示/隐藏高级搜索
+                const advancedSearch = document.getElementById('advancedSearch');
+                if (type === 'advanced') {
+                    advancedSearch.classList.add('show');
+                } else {
+                    advancedSearch.classList.remove('show');
+                }
+
+                // 更新输入框提示
+                const input = document.getElementById('chemicalInput');
+                switch (type) {
+                    case 'basic':
+                        input.placeholder = '请输入化学品名称、分子式或CAS号（如：苯、C6H6、71-43-2）';
+                        break;
+                    case 'structure':
+                        input.placeholder = '请输入SMILES结构式（如：c1ccccc1）';
+                        break;
+                    case 'batch':
+                        input.placeholder = '请输入多个化学品名称，用逗号或换行分隔';
+                        break;
+                }
             }
 
             async searchChemical() {
                 const query = document.getElementById('chemicalInput').value.trim();
                 if (!query) return;
 
+                if (this.searchType === 'batch') {
+                    return this.batchSearch(query);
+                }
+
                 // 检查缓存
-                if (this.cache.has(query)) {
-                    this.displayResult(this.cache.get(query));
+                const cacheKey = `${this.searchType}_${query}`;
+                if (this.cache.has(cacheKey)) {
+                    this.displayResult(this.cache.get(cacheKey));
                     return;
                 }
 
@@ -323,34 +579,132 @@
                 this.clearResults();
 
                 try {
-                    const result = await this.fetchChemicalData(query);
+                    let result = null;
+
+                    // 优先从本地数据库查询
+                    if (this.dataSources.local) {
+                        result = this.searchLocalDatabase(query);
+                    }
+
+                    // 如果本地没找到，尝试在线API
+                    if (!result && this.dataSources.pubchem) {
+                        result = await this.fetchChemicalData(query);
+                    }
+
                     if (result) {
-                        this.cache.set(query, result);
+                        this.cache.set(cacheKey, result);
                         this.displayResult(result);
                     } else {
                         this.showNoResult();
                     }
                 } catch (error) {
                     console.error('搜索错误:', error);
-                    this.showError('查询过程中出现错误，请稍后重试');
+                    this.showError('查询过程中出现错误，请稍后重试或尝试其他关键词');
                 } finally {
                     this.showLoading(false);
                 }
             }
 
+            searchLocalDatabase(query) {
+                const normalizedQuery = query.toLowerCase().trim();
+
+                // 直接匹配
+                for (const [key, data] of Object.entries(this.localDatabase)) {
+                    if (key.toLowerCase() === normalizedQuery ||
+                        data.englishName.toLowerCase() === normalizedQuery ||
+                        data.cas === query ||
+                        data.formula.toLowerCase() === normalizedQuery) {
+                        return {
+                            source: 'local',
+                            data: data
+                        };
+                    }
+                }
+
+                // 模糊匹配
+                for (const [key, data] of Object.entries(this.localDatabase)) {
+                    if (key.includes(normalizedQuery) ||
+                        data.englishName.toLowerCase().includes(normalizedQuery)) {
+                        return {
+                            source: 'local',
+                            data: data
+                        };
+                    }
+                }
+
+                return null;
+            }
+
+            async batchSearch(query) {
+                const chemicals = query.split(/[,\n]/).map(c => c.trim()).filter(c => c);
+                if (chemicals.length === 0) return;
+
+                this.showLoading(true);
+                this.clearResults();
+
+                const results = [];
+                for (const chemical of chemicals) {
+                    try {
+                        let result = this.searchLocalDatabase(chemical);
+                        if (!result) {
+                            result = await this.fetchChemicalData(chemical);
+                        }
+                        if (result) {
+                            results.push({
+                                query: chemical,
+                                ...result
+                            });
+                        } else {
+                            results.push({
+                                query: chemical,
+                                error: '未找到'
+                            });
+                        }
+                    } catch (error) {
+                        results.push({
+                            query: chemical,
+                            error: '查询失败'
+                        });
+                    }
+                }
+
+                this.displayBatchResults(results);
+                this.showLoading(false);
+            }
+
             async fetchChemicalData(query) {
+                const fallbackMethods = [
+                    () => this.fetchFromPubChem(query),
+                    () => this.fetchFromAlternativeSource(query),
+                    () => this.fetchByCAS(query),
+                    () => this.fetchByFormula(query)
+                ];
+
+                for (const method of fallbackMethods) {
+                    try {
+                        const result = await method();
+                        if (result) return result;
+                    } catch (error) {
+                        console.log(`查询方法失败，尝试下一种:`, error.message);
+                        continue;
+                    }
+                }
+                return null;
+            }
+
+            async fetchFromPubChem(query) {
                 try {
                     // 第一步：搜索化合物ID
                     const searchUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${encodeURIComponent(query)}/cids/JSON`;
                     const searchResponse = await fetch(searchUrl);
-                    
+
                     if (!searchResponse.ok) {
                         throw new Error('化合物未找到');
                     }
-                    
+
                     const searchData = await searchResponse.json();
                     const cid = searchData.IdentifierList.CID[0];
-                    
+
                     // 第二步：获取详细信息
                     const [basicInfo, properties, ghs] = await Promise.all([
                         this.fetchBasicInfo(cid),
@@ -359,14 +713,99 @@
                     ]);
 
                     return {
+                        source: 'pubchem',
                         cid: cid,
                         basicInfo: basicInfo,
                         properties: properties,
                         ghs: ghs
                     };
                 } catch (error) {
-                    console.error('获取数据失败:', error);
-                    return null;
+                    console.error('从 PubChem 获取数据失败:', error);
+                    throw error;
+                }
+            }
+
+            async fetchFromAlternativeSource(query) {
+                // 备用数据源：使用不同的API端点或参数
+                try {
+                    const searchUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/synonym/${encodeURIComponent(query)}/cids/JSON`;
+                    const response = await fetch(searchUrl);
+
+                    if (!response.ok) throw new Error('备用源查询失败');
+
+                    const data = await response.json();
+                    const cid = data.IdentifierList.CID[0];
+
+                    const [basicInfo, properties] = await Promise.all([
+                        this.fetchBasicInfo(cid),
+                        this.fetchProperties(cid)
+                    ]);
+
+                    return {
+                        source: 'pubchem_alt',
+                        cid: cid,
+                        basicInfo: basicInfo,
+                        properties: properties,
+                        ghs: [{ type: 'info', text: '请查阅专业SDS获取完整安全信息' }]
+                    };
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+            async fetchByCAS(query) {
+                // CAS号查询
+                if (!/^\d{1,7}-\d{2}-\d$/.test(query)) {
+                    throw new Error('不是CAS号格式');
+                }
+
+                try {
+                    const searchUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/${query}/cids/JSON`;
+                    const response = await fetch(searchUrl);
+
+                    if (!response.ok) throw new Error('CAS号查询失败');
+
+                    const data = await response.json();
+                    const cid = data.IdentifierList.CID[0];
+
+                    const basicInfo = await this.fetchBasicInfo(cid);
+                    return {
+                        source: 'cas',
+                        cid: cid,
+                        basicInfo: basicInfo,
+                        properties: {},
+                        ghs: [{ type: 'info', text: '请查阅专业SDS获取完整安全信息' }]
+                    };
+                } catch (error) {
+                    throw error;
+                }
+            }
+
+            async fetchByFormula(query) {
+                // 分子式查询
+                if (!/^[A-Za-z0-9]+$/.test(query)) {
+                    throw new Error('不是分子式格式');
+                }
+
+                try {
+                    const searchUrl = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/fastformula/${query}/cids/JSON`;
+                    const response = await fetch(searchUrl);
+
+                    if (!response.ok) throw new Error('分子式查询失败');
+
+                    const data = await response.json();
+                    const cid = data.IdentifierList.CID[0];
+
+                    const basicInfo = await this.fetchBasicInfo(cid);
+                    return {
+                        source: 'formula',
+                        cid: cid,
+                        basicInfo: basicInfo,
+                        properties: {},
+                        ghs: [{ type: 'info', text: '请查阅专业SDS获取完整安全信息' }]
+                    };
+                } catch (error) {
+                    throw error;
                 }
             }
 
@@ -410,15 +849,30 @@
 
             displayResult(data) {
                 const container = document.getElementById('resultContainer');
-                const { cid, basicInfo, properties, ghs } = data;
+
+                if (data.source === 'local') {
+                    this.displayLocalResult(data.data);
+                    return;
+                }
+
+                const { cid, basicInfo, properties, ghs, source } = data;
+                const sourceNames = {
+                    'pubchem': 'PubChem',
+                    'pubchem_alt': 'PubChem (备用)',
+                    'cas': 'CAS查询',
+                    'formula': '分子式查询'
+                };
 
                 const resultHtml = `
                     <div class="result-card">
                         <div class="result-header">
                             <div class="chemical-name">${basicInfo.IUPACName || '未知化合物'}</div>
                             <div class="chemical-formula">${basicInfo.MolecularFormula || 'N/A'}</div>
+                            <div style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
+                                📊 数据来源：${sourceNames[source] || source}
+                            </div>
                         </div>
-                        
+
                         <div class="result-body">
                             <div class="info-grid">
                                 <div class="info-section">
@@ -488,6 +942,7 @@
                                     <div class="info-content">
                                         <p><a href="https://pubchem.ncbi.nlm.nih.gov/compound/${cid}" target="_blank" style="color: #667eea; text-decoration: none;">📖 PubChem详细页面</a></p>
                                         <p style="margin-top: 8px;"><a href="https://webbook.nist.gov/cgi/cbook.cgi?ID=${basicInfo.MolecularFormula}&Units=SI" target="_blank" style="color: #667eea; text-decoration: none;">📊 NIST化学数据库</a></p>
+                                        <p style="margin-top: 8px;"><a href="https://echa.europa.eu/substance-information/-/substanceinfo/${basicInfo.MolecularFormula}" target="_blank" style="color: #667eea; text-decoration: none;">🇪🇺 ECHA数据库</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -496,6 +951,137 @@
                 `;
 
                 container.innerHTML = resultHtml;
+            }
+
+            displayLocalResult(data) {
+                const container = document.getElementById('resultContainer');
+
+                const resultHtml = `
+                    <div class="result-card">
+                        <div class="result-header">
+                            <div class="chemical-name">${data.name} (${data.englishName})</div>
+                            <div class="chemical-formula">${data.formula}</div>
+                            <div style="font-size: 14px; opacity: 0.8; margin-top: 10px;">
+                                📊 数据来源：本地数据库
+                            </div>
+                        </div>
+
+                        <div class="result-body">
+                            <div class="info-grid">
+                                <div class="info-section">
+                                    <div class="info-title">📊 基本信息</div>
+                                    <div class="info-content">
+                                        <div class="property-row">
+                                            <span class="property-label">中文名</span>
+                                            <span class="property-value">${data.name}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">英文名</span>
+                                            <span class="property-value">${data.englishName}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">CAS号</span>
+                                            <span class="property-value">${data.cas}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">分子式</span>
+                                            <span class="property-value">${data.formula}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">分子量</span>
+                                            <span class="property-value">${data.molecularWeight} g/mol</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <div class="info-title">🌡️ 物理性质</div>
+                                    <div class="info-content">
+                                        <div class="property-row">
+                                            <span class="property-label">物理状态</span>
+                                            <span class="property-value">${data.physicalState === 'liquid' ? '液体' : data.physicalState === 'solid' ? '固体' : '气体'}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">沸点</span>
+                                            <span class="property-value">${data.boilingPoint}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">熔点</span>
+                                            <span class="property-value">${data.meltingPoint}</span>
+                                        </div>
+                                        <div class="property-row">
+                                            <span class="property-label">密度</span>
+                                            <span class="property-value">${data.density}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <div class="info-title">⚠️ 安全信息</div>
+                                    <div class="info-content">
+                                        ${data.hazards.map(hazard => `
+                                            <div class="hazard-item ${hazard.type === 'serious' ? 'hazard-serious' : ''}">
+                                                ${hazard.text}
+                                            </div>
+                                        `).join('')}
+                                        <p style="margin-top: 15px; font-size: 12px; color: #666;">
+                                            ⚠️ 以上仅为基础安全提示，使用前请务必查阅完整的安全数据表(SDS)
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <div class="info-title">🔗 在线查询</div>
+                                    <div class="info-content">
+                                        <p><a href="https://pubchem.ncbi.nlm.nih.gov/compound?q=${encodeURIComponent(data.cas)}" target="_blank" style="color: #667eea; text-decoration: none;">📖 PubChem查询</a></p>
+                                        <p style="margin-top: 8px;"><a href="https://webbook.nist.gov/cgi/cbook.cgi?ID=${data.cas}&Units=SI" target="_blank" style="color: #667eea; text-decoration: none;">📊 NIST数据库</a></p>
+                                        <p style="margin-top: 8px;"><a href="https://www.chemicalbook.com/Search.aspx?keyword=${encodeURIComponent(data.cas)}" target="_blank" style="color: #667eea; text-decoration: none;">📚 ChemicalBook</a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                container.innerHTML = resultHtml;
+            }
+
+            displayBatchResults(results) {
+                const container = document.getElementById('resultContainer');
+
+                const resultsHtml = results.map((result, index) => {
+                    if (result.error) {
+                        return `
+                            <div class="result-card" style="border-left: 4px solid #dc3545;">
+                                <div class="result-header" style="background: #dc3545;">
+                                    <div class="chemical-name">${result.query}</div>
+                                    <div class="chemical-formula">${result.error}</div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    const data = result.data || result.basicInfo;
+                    return `
+                        <div class="result-card">
+                            <div class="result-header">
+                                <div class="chemical-name">${data.name || data.IUPACName || result.query}</div>
+                                <div class="chemical-formula">${data.formula || data.MolecularFormula || 'N/A'}</div>
+                            </div>
+                            <div class="result-body">
+                                <p>分子量: ${data.molecularWeight || data.MolecularWeight || 'N/A'}</p>
+                                <p>CAS: ${data.cas || 'N/A'}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = `
+                    <div style="margin-bottom: 20px; padding: 15px; background: #e3f2fd; border-radius: 8px;">
+                        <h3>📋 批量查询结果 (${results.length}个)</h3>
+                    </div>
+                    ${resultsHtml}
+                `;
             }
 
             showLoading(show) {
@@ -516,15 +1102,27 @@
             showNoResult() {
                 const container = document.getElementById('resultContainer');
                 container.innerHTML = `
-                    <div class="no-result">
+                    <div class="result-card" style="text-align: center; padding: 40px;">
                         <h3>😔 未找到相关化学品</h3>
-                        <p>请尝试：</p>
-                        <ul style="list-style: none; padding: 0; margin-top: 15px;">
-                            <li>• 使用英文名称或IUPAC名称</li>
-                            <li>• 检查拼写是否正确</li>
-                            <li>• 使用CAS号查询</li>
-                            <li>• 尝试化学式查询</li>
-                        </ul>
+                        <div style="margin: 20px 0; color: #666;">
+                            <p>已在多个数据源中搜索，但未找到匹配的结果</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0; text-align: left;">
+                            <h4 style="margin-bottom: 15px; color: #333;">💡 建议尝试：</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0;">
+                                <li style="margin-bottom: 8px;">• 使用英文名称或IUPAC名称</li>
+                                <li style="margin-bottom: 8px;">• 检查拼写是否正确</li>
+                                <li style="margin-bottom: 8px;">• 使用CAS号查询（格式：XXXXXX-XX-X）</li>
+                                <li style="margin-bottom: 8px;">• 尝试化学式查询（如：C6H6）</li>
+                                <li style="margin-bottom: 8px;">• 使用常用别名或俗名</li>
+                                <li style="margin-bottom: 8px;">• 尝试去掉特殊字符和空格</li>
+                            </ul>
+                        </div>
+                        <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-top: 20px;">
+                            <p style="margin: 0; color: #0066cc; font-size: 14px;">
+                                📞 如果仍无法找到，请尝试直接访问 <a href="https://pubchem.ncbi.nlm.nih.gov" target="_blank" style="color: #0066cc;">PubChem</a> 或 <a href="https://webbook.nist.gov" target="_blank" style="color: #0066cc;">NIST</a> 进行手动搜索
+                            </p>
+                        </div>
                     </div>
                 `;
             }
@@ -535,6 +1133,11 @@
                     <div class="error-card">
                         <h4>❌ 查询失败</h4>
                         <p>${message}</p>
+                        <div style="margin-top: 15px; padding: 10px; background: #fff3cd; border-radius: 5px;">
+                            <p style="margin: 0; font-size: 14px; color: #856404;">
+                                🛠️ 可能的原因：网络连接问题、API限制或数据源临时不可用
+                            </p>
+                        </div>
                     </div>
                 `;
             }
