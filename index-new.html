@@ -516,153 +516,6 @@
             }
         }
 
-        /* 工具视图样式 */
-        .tools-container h2 {
-            font-size: 28px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .tool-categories {
-            display: grid;
-            gap: 32px;
-        }
-
-        .tool-category h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            color: var(--primary-color);
-        }
-
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-        }
-
-        .tool-item {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .tool-item:hover {
-            background: var(--primary-color);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .tool-item i {
-            font-size: 24px;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        /* 标准库视图样式 */
-        .standards-container h2 {
-            font-size: 28px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .standard-category {
-            margin-bottom: 32px;
-        }
-
-        .standard-category h3 {
-            font-size: 20px;
-            margin-bottom: 16px;
-            color: var(--primary-color);
-        }
-
-        .standard-item {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin-bottom: 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .standard-info h4 {
-            font-size: 16px;
-            margin-bottom: 4px;
-            color: var(--text-color);
-        }
-
-        .standard-info p {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .standard-actions {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-view, .btn-use {
-            padding: 8px 16px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-            color: var(--text-color);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 14px;
-        }
-
-        .btn-use {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .btn-view:hover {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        /* 帮助视图样式 */
-        .help-container h2 {
-            font-size: 28px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
-
-        .help-section {
-            background: var(--bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .help-section h3 {
-            font-size: 18px;
-            margin-bottom: 16px;
-            color: var(--primary-color);
-        }
-
-        .help-section h4 {
-            font-size: 16px;
-            margin: 16px 0 8px;
-            color: var(--text-color);
-        }
-
-        .faq-item {
-            margin-bottom: 16px;
-        }
-
-        .faq-item h4 {
-            margin-bottom: 4px;
-        }
-
         /* 加载动画 */
         .loading {
             display: inline-block;
@@ -680,57 +533,503 @@
     </style>
 </head>
 <body>
-    <!-- 主界面将通过JavaScript动态生成 -->
+    <!-- 主界面容器 -->
+    <div class="chemsafe-main-container">
+        <!-- 顶部导航栏 -->
+        <header class="main-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <i class="fas fa-flask"></i>
+                    <h1>ChemSafe Pro</h1>
+                    <span class="version">v3.0</span>
+                </div>
+                <nav class="main-nav">
+                    <button class="nav-btn active" onclick="switchView('home')">
+                        <i class="fas fa-home"></i> 首页
+                    </button>
+                    <button class="nav-btn" onclick="switchView('tools')">
+                        <i class="fas fa-tools"></i> 工具箱
+                    </button>
+                    <button class="nav-btn" onclick="switchView('standards')">
+                        <i class="fas fa-book"></i> 标准库
+                    </button>
+                    <button class="nav-btn" onclick="switchView('help')">
+                        <i class="fas fa-question-circle"></i> 帮助
+                    </button>
+                </nav>
+                <div class="header-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="settings-btn" onclick="openSettings()">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
 
-    <!-- 加载提示 -->
-    <div id="loading-screen" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: var(--bg-color);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 9999;
-    ">
-        <div style="text-align: center;">
-            <div class="loading"></div>
-            <p style="margin-top: 16px; color: var(--text-secondary);">正在加载 ChemSafe Pro...</p>
-        </div>
+        <!-- 主内容区域 -->
+        <main class="main-content">
+            <!-- 首页视图 -->
+            <div class="view-container active" id="home-view">
+                <div class="home-container">
+                    <!-- 欢迎区域 -->
+                    <section class="welcome-section">
+                        <div class="welcome-content">
+                            <h2>欢迎使用 ChemSafe Pro</h2>
+                            <p class="subtitle">专业的化工安全数据查询与评估平台</p>
+                            <div class="feature-highlights">
+                                <div class="highlight-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span>权威标准</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-calculator"></i>
+                                    <span>智能计算</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>报告生成</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-mobile-alt"></i>
+                                    <span>移动友好</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 功能卡片区域 -->
+                    <section class="features-section">
+                        <h3>核心功能模块</h3>
+                        <div class="feature-cards">
+                            <!-- 重大危险源评估 -->
+                            <div class="feature-card major-hazard" onclick="loadModule('majorHazard')">
+                                <div class="card-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>重大危险源评估</h4>
+                                    <p>基于GB18218-2018标准，智能辨识和分级评估重大危险源</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">辨识计算</span>
+                                        <span class="feature-tag">分级评估</span>
+                                        <span class="feature-tag">报告生成</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <!-- 职业接触限值查询 -->
+                            <div class="feature-card oel-monitoring" onclick="loadModule('oelMonitoring')">
+                                <div class="card-icon">
+                                    <i class="fas fa-lungs"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>职业接触限值查询</h4>
+                                    <p>基于GBZ 2.1-2019标准，查询化学品职业接触限值和暴露评估</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">限值查询</span>
+                                        <span class="feature-tag">单位换算</span>
+                                        <span class="feature-tag">暴露评估</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <!-- MSDS数据库 -->
+                            <div class="feature-card msds-database" onclick="loadModule('msdsDatabase')">
+                                <div class="card-icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>MSDS数据库</h4>
+                                    <p>化学品安全数据表查询，支持中英文名称和CAS号搜索</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">智能搜索</span>
+                                        <span class="feature-tag">GHS分类</span>
+                                        <span class="feature-tag">安全信息</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <!-- 气体换算工具 -->
+                            <div class="feature-card gas-calculator" onclick="loadModule('gasCalculator')">
+                                <div class="card-icon">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>气体换算工具</h4>
+                                    <p>可燃有毒气体浓度单位转换，支持温度压力修正</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">单位转换</span>
+                                        <span class="feature-tag">条件修正</span>
+                                        <span class="feature-tag">混合计算</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <!-- 防火间距计算 -->
+                            <div class="feature-card fire-distance" onclick="loadModule('fireDistance')">
+                                <div class="card-icon">
+                                    <i class="fas fa-ruler"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>防火间距计算</h4>
+                                    <p>建筑防火间距自动计算，符合GB 50016标准要求</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">间距计算</span>
+                                        <span class="feature-tag">规范查询</span>
+                                        <span class="feature-tag">图形展示</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
+                            <!-- 风险评估工具 -->
+                            <div class="feature-card risk-assessment" onclick="loadModule('riskAssessment')">
+                                <div class="card-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>风险评估工具</h4>
+                                    <p>多维度安全风险分析，生成专业评估报告</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">风险矩阵</span>
+                                        <span class="feature-tag">定量评估</span>
+                                        <span class="feature-tag">控制措施</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 快速操作区域 -->
+                    <section class="quick-actions">
+                        <h3>快速操作</h3>
+                        <div class="quick-action-buttons">
+                            <button class="quick-btn" onclick="quickMSDSSearch()">
+                                <i class="fas fa-search"></i>
+                                <span>快速MSDS查询</span>
+                            </button>
+                            <button class="quick-btn" onclick="quickOELLookup()">
+                                <i class="fas fa-list"></i>
+                                <span>限值快查</span>
+                            </button>
+                            <button class="quick-btn" onclick="quickUnitConversion()">
+                                <i class="fas fa-calculator"></i>
+                                <span>单位换算</span>
+                            </button>
+                            <button class="quick-btn" onclick="quickHazardCheck()">
+                                <i class="fas fa-exclamation"></i>
+                                <span>危险源快检</span>
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- 其他视图（工具箱、标准库、帮助等）将在这里动态加载 -->
+            <div class="view-container" id="tools-view">
+                <div class="coming-soon-container">
+                    <div class="coming-soon-content">
+                        <i class="fas fa-tools"></i>
+                        <h2>工具箱</h2>
+                        <p>更多专业工具正在开发中...</p>
+                        <div class="development-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <span>开发进度: 75%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-container" id="standards-view">
+                <div class="coming-soon-container">
+                    <div class="coming-soon-content">
+                        <i class="fas fa-book"></i>
+                        <h2>标准库</h2>
+                        <p>标准规范数据库正在完善中...</p>
+                        <div class="development-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%"></div>
+                            </div>
+                            <span>开发进度: 60%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="view-container" id="help-view">
+                <div class="help-container">
+                    <h2>使用帮助</h2>
+                    <div class="help-sections">
+                        <div class="help-section">
+                            <h3>快速入门</h3>
+                            <div class="help-content">
+                                <ol>
+                                    <li>选择需要使用的功能模块</li>
+                                    <li>按照向导提示输入相关数据</li>
+                                    <li>系统自动计算并生成结果</li>
+                                    <li>导出报告或保存数据</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模块容器 -->
+            <div class="module-container" id="module-container" style="display: none;">
+                <!-- 动态加载的模块内容 -->
+            </div>
+        </main>
+
+        <!-- 底部状态栏 -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <span>ChemSafe Pro - 专业化工安全工具平台</span>
+                    <span class="separator">|</span>
+                    <span>基于国家标准GB18218-2018、GBZ 2.1-2019</span>
+                </div>
+                <div class="footer-status">
+                    <span id="status-indicator">就绪</span>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- JavaScript模块 -->
-    <script type="module" src="src/main-interface.js"></script>
-
+    <!-- JavaScript 功能 -->
     <script>
-        // 页面加载完成后隐藏加载屏幕
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const loadingScreen = document.getElementById('loading-screen');
-                if (loadingScreen) {
-                    loadingScreen.style.opacity = '0';
-                    loadingScreen.style.transition = 'opacity 0.5s ease';
-                    setTimeout(() => {
-                        loadingScreen.remove();
-                    }, 500);
-                }
-            }, 1000);
-        });
+        // 主题切换功能
+        function toggleTheme() {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
 
-        // 服务工作者注册（PWA支持）
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
+            const themeIcon = document.querySelector('.theme-toggle i');
+            themeIcon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
         }
+
+        // 视图切换功能
+        function switchView(viewId) {
+            // 隐藏所有视图
+            document.querySelectorAll('.view-container').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById('module-container').style.display = 'none';
+
+            // 显示目标视图
+            document.getElementById(`${viewId}-view`).classList.add('active');
+
+            // 更新导航状态
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            updateStatus('就绪');
+        }
+
+        // 加载模块功能
+        function loadModule(moduleId) {
+            const moduleContainer = document.getElementById('module-container');
+
+            // 隐藏主视图
+            document.querySelectorAll('.view-container').forEach(view => {
+                view.style.display = 'none';
+            });
+
+            // 显示模块容器
+            moduleContainer.style.display = 'block';
+
+            // 根据模块ID显示不同内容
+            let moduleContent = '';
+            switch(moduleId) {
+                case 'majorHazard':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div class="coming-soon-container">
+                            <div class="coming-soon-content">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                <h2>重大危险源评估模块</h2>
+                                <p>基于GB18218-2018标准的完整评估功能正在加载中...</p>
+                                <div class="development-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 90%"></div>
+                                    </div>
+                                    <span>功能完成度: 90%</span>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <p><strong>已实现功能：</strong></p>
+                                    <ul style="text-align: left; margin-top: 10px;">
+                                        <li>✅ GB18218-2018标准85种化学品数据库</li>
+                                        <li>✅ S值自动计算（辨识指标）</li>
+                                        <li>✅ R值自动计算（分级指标）</li>
+                                        <li>✅ 危险源级别自动判定</li>
+                                        <li>🔄 评估报告生成（开发中）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'oelMonitoring':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div class="coming-soon-container">
+                            <div class="coming-soon-content">
+                                <i class="fas fa-lungs"></i>
+                                <h2>职业接触限值查询模块</h2>
+                                <p>基于GBZ 2.1-2019标准的职业健康功能正在加载中...</p>
+                                <div class="development-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%"></div>
+                                    </div>
+                                    <span>功能完成度: 85%</span>
+                                </div>
+                                <div style="margin-top: 20px;">
+                                    <p><strong>已实现功能：</strong></p>
+                                    <ul style="text-align: left; margin-top: 10px;">
+                                        <li>✅ GBZ 2.1-2019职业接触限值数据</li>
+                                        <li>✅ 化学品智能搜索功能</li>
+                                        <li>✅ ppm ↔ mg/m³ 单位换算</li>
+                                        <li>✅ 暴露风险评估算法</li>
+                                        <li>🔄 监测方案生成（开发中）</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                default:
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div class="coming-soon-container">
+                            <div class="coming-soon-content">
+                                <i class="fas fa-tools"></i>
+                                <h2>${getModuleName(moduleId)}</h2>
+                                <p>该功能正在开发中，敬请期待...</p>
+                                <div class="development-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 60%"></div>
+                                    </div>
+                                    <span>开发进度: 60%</span>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+            }
+
+            moduleContainer.innerHTML = moduleContent;
+            updateStatus(`已加载 ${getModuleName(moduleId)} 模块`);
+        }
+
+        // 返回首页
+        function backToHome() {
+            document.getElementById('module-container').style.display = 'none';
+            document.getElementById('home-view').style.display = 'block';
+
+            // 更新导航状态
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('.nav-btn').classList.add('active');
+
+            updateStatus('就绪');
+        }
+
+        // 获取模块名称
+        function getModuleName(moduleId) {
+            const names = {
+                majorHazard: '重大危险源评估',
+                oelMonitoring: '职业接触限值查询',
+                msdsDatabase: 'MSDS数据库',
+                gasCalculator: '气体换算工具',
+                fireDistance: '防火间距计算',
+                riskAssessment: '风险评估工具'
+            };
+            return names[moduleId] || '未知模块';
+        }
+
+        // 更新状态
+        function updateStatus(message) {
+            const statusElement = document.getElementById('status-indicator');
+            if (statusElement) {
+                statusElement.textContent = message;
+            }
+        }
+
+        // 快速操作函数
+        function quickMSDSSearch() {
+            loadModule('msdsDatabase');
+        }
+
+        function quickOELLookup() {
+            loadModule('oelMonitoring');
+        }
+
+        function quickUnitConversion() {
+            loadModule('gasCalculator');
+        }
+
+        function quickHazardCheck() {
+            loadModule('majorHazard');
+        }
+
+        function openSettings() {
+            alert('设置功能正在开发中...');
+        }
+
+        // 页面加载时初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 恢复主题设置
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+                document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+            }
+
+            // 导航按钮点击事件
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const viewId = this.onclick.toString().match(/'(\w+)'/)?.[1];
+                    if (viewId) {
+                        switchView(viewId);
+                    }
+                });
+            });
+
+            updateStatus('ChemSafe Pro v3.0 已启动');
+            console.log('ChemSafe Pro 初始化完成');
+        });
     </script>
 </body>
 </html>
