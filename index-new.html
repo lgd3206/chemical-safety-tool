@@ -823,6 +823,25 @@
         </footer>
     </div>
 
+    <!-- 加载屏幕 -->
+    <div id="loading-screen" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    ">
+        <div style="text-align: center;">
+            <div class="loading"></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">正在加载专业化工安全工具...</p>
+        </div>
+    </div>
+
     <!-- JavaScript 功能 -->
     <script>
         // 主题切换功能
@@ -1009,6 +1028,18 @@
 
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function() {
+            // 隐藏加载屏幕
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                    }, 500);
+                }
+            }, 1000);
+
             // 恢复主题设置
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
