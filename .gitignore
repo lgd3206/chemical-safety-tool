@@ -1,0 +1,25 @@
+# .gitignore
+
+# 临时文件
+*.tmp
+*.log
+新建*
+
+# 敏感信息
+.claude/settings.local.json
+
+# 操作系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器配置
+.vscode/
+.idea/
+
+# 依赖文件
+node_modules/
+package-lock.json
+
+# 构建输出
+dist/
+build/
