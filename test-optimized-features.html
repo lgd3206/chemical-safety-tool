@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemSafe Pro 优化版功能测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            padding: 20px;
+            background: #f5f7fa;
+            line-height: 1.6;
+        }
+        .test-container {
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-result {
+            margin: 12px 0;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+        .error { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+        .warning { background: #fff3cd; color: #856404; border-left: 4px solid #ffc107; }
+        .info { background: #d1ecf1; color: #0c5460; border-left: 4px solid #17a2b8; }
+        h1 { color: #2c3e50; text-align: center; margin-bottom: 30px; }
+        h2 { color: #34495e; border-bottom: 2px solid #3498db; padding-bottom: 8px; }
+        pre {
+            background: #f8f9fa;
+            padding: 16px;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 12px;
+            border: 1px solid #e9ecef;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+        .status-pass { background: #d4edda; color: #155724; }
+        .status-fail { background: #f8d7da; color: #721c24; }
+        .feature-list { list-style: none; padding: 0; }
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 ChemSafe Pro 优化版功能完整性测试</h1>
+
+    <div class="test-container">
+        <h2>1. 应用程序初始化测试</h2>
+        <div id="init-test"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>2. 服务模块加载测试</h2>
+        <ul class="feature-list">
+            <li>
+                化学数据服务 (ChemicalDataService)
+                <span id="chemical-data-status" class="status-badge">测试中...</span>
+            </li>
+            <li>
+                本地数据服务 (LocalDataService)
+                <span id="local-data-status" class="status-badge">测试中...</span>
+            </li>
+            <li>
+                重大危险源评估 (MajorHazardAssessment)
+                <span id="hazard-assessment-status" class="status-badge">测试中...</span>
+            </li>
+            <li>
+                GHS分类系统 (GHSClassificationSystem)
+                <span id="ghs-status" class="status-badge">测试中...</span>
+            </li>
+        </ul>
+    </div>
+
+    <div class="test-container">
+        <h2>3. 响应式布局测试</h2>
+        <div id="responsive-test"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>4. 关键功能测试</h2>
+        <div id="function-test"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>5. 重大危险源评估验证</h2>
+        <div id="hazard-verification"></div>
+    </div>
+
+    <script type="module">
+        // 测试应用初始化
+        async function testAppInitialization() {
+            try {
+                // 动态导入优化的应用
+                const { ChemSafeProApp } = await import('./src/js/optimized-app.js');
+
+                // 创建应用实例进行测试（不显示UI）
+                const testApp = new (class extends ChemSafeProApp {
+                    constructor() {
+                        super();
+                        // 覆盖UI初始化以避免DOM操作错误
+                        this.ui = {
+                            loadingIndicator: { style: { display: 'none' } },
+                            app: { style: { display: 'block' } },
+                            searchInput: { focus: () => {} },
+                            searchBtn: {
+                                classList: { add: () => {}, remove: () => {} },
+                                disabled: false
+                            },
+                            stats: {
+                                searchCount: { textContent: '' },
+                                localDbCount: { textContent: '' }
+                            }
+                        };
+                    }
+
+                    initializeUI() {
+                        return this.ui;
+                    }
+
+                    showLoading() {}
+                    hideLoading() {}
+                })();
+
+                document.getElementById('init-test').innerHTML = `
+                    <div class="test-result success">
+                        <strong>✅ 应用初始化成功</strong><br>
+                        服务数量: ${Object.keys(testApp.services).length}<br>
+                        状态初始化: ${testApp.state ? '成功' : '失败'}
+                    </div>
+                `;
+
+                return testApp;
+            } catch (error) {
+                document.getElementById('init-test').innerHTML = `
+                    <div class="test-result error">
+                        <strong>❌ 应用初始化失败</strong><br>
+                        错误: ${error.message}
+                    </div>
+                `;
+                throw error;
+            }
+        }
+
+        // 测试服务模块
+        async function testServices() {
+            try {
+                const { ChemicalDataService } = await import('./src/services/chemical-data-service.js');
+                const { LocalDataService } = await import('./src/services/local-data-service.js');
+                const { MajorHazardAssessment } = await import('./src/services/major-hazard-assessment.js');
+                const { GHSClassificationSystem } = await import('./src/services/ghs-classification.js');
+
+                // 测试化学数据服务
+                const chemicalService = new ChemicalDataService();
+                document.getElementById('chemical-data-status').textContent = '通过';
+                document.getElementById('chemical-data-status').className = 'status-badge status-pass';
+
+                // 测试本地数据服务
+                const localService = new LocalDataService();
+                const totalCount = localService.getTotalCount();
+                document.getElementById('local-data-status').textContent = `通过 (${totalCount}条数据)`;
+                document.getElementById('local-data-status').className = 'status-badge status-pass';
+
+                // 测试重大危险源评估
+                const hazardService = new MajorHazardAssessment();
+                const testResult = hazardService.identifySingleSubstance('7664-41-7', 15, 't');
+                document.getElementById('hazard-assessment-status').textContent = `通过 (${testResult.level.name})`;
+                document.getElementById('hazard-assessment-status').className = 'status-badge status-pass';
+
+                // 测试GHS分类系统
+                const ghsService = new GHSClassificationSystem();
+                document.getElementById('ghs-status').textContent = '通过';
+                document.getElementById('ghs-status').className = 'status-badge status-pass';
+
+                return { chemicalService, localService, hazardService, ghsService };
+            } catch (error) {
+                const failedServices = ['chemical-data-status', 'local-data-status', 'hazard-assessment-status', 'ghs-status'];
+                failedServices.forEach(id => {
+                    const element = document.getElementById(id);
+                    if (element.textContent === '测试中...') {
+                        element.textContent = '失败';
+                        element.className = 'status-badge status-fail';
+                    }
+                });
+                throw error;
+            }
+        }
+
+        // 测试响应式布局
+        function testResponsiveLayout() {
+            const breakpoints = [
+                { name: '桌面版', width: 1200 },
+                { name: '平板版', width: 768 },
+                { name: '手机版', width: 480 },
+                { name: '小屏手机', width: 320 }
+            ];
+
+            let results = breakpoints.map(bp => {
+                // 模拟不同屏幕尺寸
+                const isSupported = window.matchMedia ?
+                    window.matchMedia(`(max-width: ${bp.width}px)`).matches ||
+                    window.innerWidth <= bp.width : true;
+
+                return `
+                    <div class="test-result ${isSupported ? 'success' : 'info'}">
+                        ${bp.name} (${bp.width}px): ${isSupported ? '✅ 适配' : 'ℹ️ 当前不在此断点'}
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('responsive-test').innerHTML = results + `
+                <div class="test-result info">
+                    <strong>当前视窗尺寸:</strong> ${window.innerWidth}px × ${window.innerHeight}px
+                </div>
+            `;
+        }
+
+        // 测试关键功能
+        async function testKeyFunctions(services) {
+            try {
+                const tests = [];
+
+                // 测试本地搜索
+                const localResult = services.localService.searchByName('氨');
+                tests.push({
+                    name: '本地搜索功能',
+                    result: localResult ? '✅ 通过' : '❌ 失败',
+                    details: localResult ? `找到: ${localResult.name} (${localResult.cas})` : '未找到结果'
+                });
+
+                // 测试重大危险源评估
+                const hazardResult = services.hazardService.identifySingleSubstance('7664-41-7', 10, 't');
+                tests.push({
+                    name: '重大危险源评估',
+                    result: hazardResult.level ? '✅ 通过' : '❌ 失败',
+                    details: hazardResult.level ?
+                        `等级: ${hazardResult.level.name}, R值: ${hazardResult.riskQuotient}` :
+                        '评估失败'
+                });
+
+                // 测试多物质评估
+                const multiResult = services.hazardService.identifyMultipleSubstances([
+                    { cas: '7664-41-7', quantity: 5, unit: 't' },
+                    { cas: '7782-50-5', quantity: 2, unit: 't' }
+                ]);
+                tests.push({
+                    name: '多介质危险源评估',
+                    result: multiResult.level ? '✅ 通过' : '❌ 失败',
+                    details: multiResult.level ?
+                        `总R值: ${multiResult.totalRiskQuotient.toFixed(3)}, 等级: ${multiResult.level.name}` :
+                        '评估失败'
+                });
+
+                const resultsHtml = tests.map(test => `
+                    <div class="test-result ${test.result.includes('✅') ? 'success' : 'error'}">
+                        <strong>${test.name}:</strong> ${test.result}<br>
+                        <small>${test.details}</small>
+                    </div>
+                `).join('');
+
+                document.getElementById('function-test').innerHTML = resultsHtml;
+            } catch (error) {
+                document.getElementById('function-test').innerHTML = `
+                    <div class="test-result error">
+                        <strong>❌ 功能测试失败:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // 执行重大危险源验证
+        function testHazardVerification(services) {
+            try {
+                const verificationTests = [
+                    {
+                        name: '氨气标准验证',
+                        cas: '7664-41-7',
+                        quantity: 15,
+                        expectedLevel: '四级重大危险源',
+                        expectedR: 1.5
+                    },
+                    {
+                        name: '氯气标准验证',
+                        cas: '7782-50-5',
+                        quantity: 10,
+                        expectedLevel: '四级重大危险源',
+                        expectedR: 2.0
+                    }
+                ];
+
+                const results = verificationTests.map(test => {
+                    try {
+                        const result = services.hazardService.identifySingleSubstance(test.cas, test.quantity, 't');
+                        const rMatch = Math.abs(result.riskQuotient - test.expectedR) < 0.1;
+                        const levelMatch = result.level.name === test.expectedLevel;
+
+                        return `
+                            <div class="test-result ${rMatch && levelMatch ? 'success' : 'warning'}">
+                                <strong>${test.name}:</strong><br>
+                                风险商: ${result.riskQuotient} (预期: ${test.expectedR}) ${rMatch ? '✅' : '⚠️'}<br>
+                                等级: ${result.level.name} (预期: ${test.expectedLevel}) ${levelMatch ? '✅' : '⚠️'}
+                            </div>
+                        `;
+                    } catch (error) {
+                        return `
+                            <div class="test-result error">
+                                <strong>${test.name}:</strong> ❌ 测试失败 - ${error.message}
+                            </div>
+                        `;
+                    }
+                }).join('');
+
+                document.getElementById('hazard-verification').innerHTML = results;
+            } catch (error) {
+                document.getElementById('hazard-verification').innerHTML = `
+                    <div class="test-result error">
+                        <strong>❌ 验证测试失败:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // 执行所有测试
+        async function runAllTests() {
+            try {
+                console.log('开始执行功能测试...');
+
+                // 1. 初始化测试
+                const app = await testAppInitialization();
+
+                // 2. 服务测试
+                const services = await testServices();
+
+                // 3. 响应式测试
+                testResponsiveLayout();
+
+                // 4. 功能测试
+                await testKeyFunctions(services);
+
+                // 5. 验证测试
+                testHazardVerification(services);
+
+                console.log('所有测试完成！');
+
+            } catch (error) {
+                console.error('测试过程中发生错误:', error);
+            }
+        }
+
+        // 页面加载完成后运行测试
+        document.addEventListener('DOMContentLoaded', runAllTests);
+    </script>
+</body>
+</html>

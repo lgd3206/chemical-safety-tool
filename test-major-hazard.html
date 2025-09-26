@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>重大危险源评估功能测试</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-container { background: white; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        h2 { color: #333; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🧪 重大危险源评估模块测试</h1>
+
+    <div class="test-container">
+        <h2>测试 1: 单一介质评估 - 氨气</h2>
+        <p>测试用例：氨气 (CAS: 7664-41-7) 存储量 15 吨</p>
+        <p>预期结果：风险商 R = 15/10 = 1.5，应为三级重大危险源</p>
+        <div id="test1-result"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>测试 2: 单一介质评估 - 氯气</h2>
+        <p>测试用例：氯气 (CAS: 7782-50-5) 存储量 5 吨</p>
+        <p>预期结果：风险商 R = 5/1 = 5，应为三级重大危险源</p>
+        <div id="test2-result"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>测试 3: 多介质评估</h2>
+        <p>测试用例：氨气 8吨 + 氯气 0.5吨</p>
+        <p>预期结果：总风险商 R = 8/10 + 0.5/1 = 0.8 + 0.5 = 1.3，应为三级重大危险源</p>
+        <div id="test3-result"></div>
+    </div>
+
+    <div class="test-container">
+        <h2>测试 4: 非重大危险源</h2>
+        <p>测试用例：乙醇 (CAS: 64-17-5) 存储量 100 吨</p>
+        <p>预期结果：风险商 R = 100/500 = 0.2，应为非重大危险源</p>
+        <div id="test4-result"></div>
+    </div>
+
+    <script type="module">
+        import { MajorHazardAssessment } from './src/services/major-hazard-assessment.js';
+
+        const assessment = new MajorHazardAssessment();
+
+        function runTest(testId, testFunction, description) {
+            const resultDiv = document.getElementById(testId);
+            try {
+                const result = testFunction();
+                resultDiv.innerHTML = `
+                    <div class="test-result success">
+                        <strong>✅ 测试通过</strong><br>
+                        ${description}<br>
+                        <pre>${JSON.stringify(result, null, 2)}</pre>
+                    </div>
+                `;
+            } catch (error) {
+                resultDiv.innerHTML = `
+                    <div class="test-result error">
+                        <strong>❌ 测试失败</strong><br>
+                        错误信息: ${error.message}<br>
+                        <pre>${error.stack}</pre>
+                    </div>
+                `;
+            }
+        }
+
+        // 测试 1: 氨气单一介质评估
+        runTest('test1-result', () => {
+            const result = assessment.identifySingleSubstance('7664-41-7', 15, 't');
+            console.log('Test 1 - 氨气 15吨:', result);
+
+            // 验证计算结果
+            if (Math.abs(result.riskQuotient - 1.5) > 0.001) {
+                throw new Error(`风险商计算错误: 期望 1.5, 实际 ${result.riskQuotient}`);
+            }
+
+            if (!result.level.name.includes('三级')) {
+                throw new Error(`等级评估错误: 期望三级, 实际 ${result.level.name}`);
+            }
+
+            return {
+                substance: result.substance.name,
+                actualQuantity: result.actualQuantity,
+                criticalQuantity: result.criticalQuantity,
+                riskQuotient: result.riskQuotient,
+                level: result.level.name,
+                isMajorHazard: result.isMajorHazard
+            };
+        }, '氨气 15吨 - 风险商1.5，三级重大危险源');
+
+        // 测试 2: 氯气单一介质评估
+        runTest('test2-result', () => {
+            const result = assessment.identifySingleSubstance('7782-50-5', 5, 't');
+            console.log('Test 2 - 氯气 5吨:', result);
+
+            if (Math.abs(result.riskQuotient - 5.0) > 0.001) {
+                throw new Error(`风险商计算错误: 期望 5.0, 实际 ${result.riskQuotient}`);
+            }
+
+            if (!result.level.name.includes('三级')) {
+                throw new Error(`等级评估错误: 期望三级, 实际 ${result.level.name}`);
+            }
+
+            return {
+                substance: result.substance.name,
+                actualQuantity: result.actualQuantity,
+                criticalQuantity: result.criticalQuantity,
+                riskQuotient: result.riskQuotient,
+                level: result.level.name,
+                isMajorHazard: result.isMajorHazard
+            };
+        }, '氯气 5吨 - 风险商5.0，三级重大危险源');
+
+        // 测试 3: 多介质评估
+        runTest('test3-result', () => {
+            const substances = [
+                { cas: '7664-41-7', quantity: 8, unit: 't' },    // 氨气 8吨
+                { cas: '7782-50-5', quantity: 0.5, unit: 't' }   // 氯气 0.5吨
+            ];
+
+            const result = assessment.identifyMultipleSubstances(substances);
+            console.log('Test 3 - 多介质评估:', result);
+
+            const expectedTotal = 8/10 + 0.5/1; // 0.8 + 0.5 = 1.3
+            if (Math.abs(result.totalRiskQuotient - expectedTotal) > 0.001) {
+                throw new Error(`总风险商计算错误: 期望 ${expectedTotal}, 实际 ${result.totalRiskQuotient}`);
+            }
+
+            if (!result.level.name.includes('三级')) {
+                throw new Error(`等级评估错误: 期望三级, 实际 ${result.level.name}`);
+            }
+
+            return {
+                totalRiskQuotient: result.totalRiskQuotient,
+                level: result.level.name,
+                isMajorHazard: result.isMajorHazard,
+                substanceCount: result.substances.length
+            };
+        }, '氨气8吨+氯气0.5吨 - 总风险商1.3，三级重大危险源');
+
+        // 测试 4: 非重大危险源
+        runTest('test4-result', () => {
+            const result = assessment.identifySingleSubstance('64-17-5', 100, 't');
+            console.log('Test 4 - 乙醇 100吨:', result);
+
+            if (Math.abs(result.riskQuotient - 0.2) > 0.001) {
+                throw new Error(`风险商计算错误: 期望 0.2, 实际 ${result.riskQuotient}`);
+            }
+
+            if (result.isMajorHazard) {
+                throw new Error(`应为非重大危险源，但评估为重大危险源`);
+            }
+
+            return {
+                substance: result.substance.name,
+                actualQuantity: result.actualQuantity,
+                criticalQuantity: result.criticalQuantity,
+                riskQuotient: result.riskQuotient,
+                level: result.level.name,
+                isMajorHazard: result.isMajorHazard
+            };
+        }, '乙醇 100吨 - 风险商0.2，非重大危险源');
+    </script>
+</body>
+</html>

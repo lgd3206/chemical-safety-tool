@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ChemSafe Pro - 专业化工安全工具平台</title>
+    <meta name="description" content="专业的化工安全数据查询平台，支持GHS分类、重大危险源评估、风险分析等功能">
+    <meta name="keywords" content="化工安全,化学品数据库,重大危险源,GHS分类,风险评估">
+
+    <!-- PWA支持 -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+
+    <!-- 图标 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+
+    <!-- 样式 -->
+    <link rel="stylesheet" href="src/styles/optimized.css">
+
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 加载指示器 -->
+    <div id="loadingIndicator" class="loading-indicator">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在加载专业化工安全工具...</div>
+    </div>
+
+    <!-- 主应用容器 -->
+    <div id="app" class="app-container" style="display: none;">
+
+        <!-- 顶部导航栏 -->
+        <header class="top-navbar">
+            <div class="navbar-brand">
+                <i class="fas fa-flask"></i>
+                <h1>ChemSafe Pro</h1>
+                <span class="version-tag">v2.1</span>
+            </div>
+
+            <div class="navbar-actions">
+                <button class="nav-btn" onclick="toggleTheme()" title="切换主题">
+                    <i class="fas fa-adjust"></i>
+                </button>
+                <button class="nav-btn" onclick="showAbout()" title="关于">
+                    <i class="fas fa-info-circle"></i>
+                </button>
+                <div class="hamburger-menu" onclick="toggleMobileMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 移动端导航菜单 -->
+        <div id="mobileMenu" class="mobile-menu">
+            <div class="mobile-menu-item" onclick="switchModule('search')">
+                <i class="fas fa-search"></i>
+                <span>化学品查询</span>
+            </div>
+            <div class="mobile-menu-item" onclick="switchModule('hazard')">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>重大危险源</span>
+            </div>
+            <div class="mobile-menu-item" onclick="switchModule('tools')">
+                <i class="fas fa-calculator"></i>
+                <span>计算工具</span>
+            </div>
+            <div class="mobile-menu-item" onclick="switchModule('history')">
+                <i class="fas fa-history"></i>
+                <span>查询历史</span>
+            </div>
+        </div>
+
+        <!-- 主要内容区域 -->
+        <main class="main-content">
+
+            <!-- 功能导航卡片 -->
+            <div class="function-cards">
+                <div class="function-card active" data-module="search" onclick="switchModule('search')">
+                    <div class="card-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>化学品查询</h3>
+                        <p>多数据源搜索，完整安全信息</p>
+                        <div class="card-stats">
+                            <span id="searchCount">今日查询: 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="function-card" data-module="hazard" onclick="switchModule('hazard')">
+                    <div class="card-icon warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>重大危险源</h3>
+                        <p>GB18218-2018标准评估</p>
+                        <div class="card-stats">
+                            <span>支持85种化学品</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="function-card" data-module="tools" onclick="switchModule('tools')">
+                    <div class="card-icon info">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>计算工具</h3>
+                        <p>浓度换算，单位转换</p>
+                        <div class="card-stats">
+                            <span>专业化工计算</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="function-card" data-module="analysis" onclick="switchModule('analysis')">
+                    <div class="card-icon success">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>风险分析</h3>
+                        <p>GHS分类，储存兼容性</p>
+                        <div class="card-stats">
+                            <span>安全评估</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 模块内容容器 -->
+            <div class="module-content">
+
+                <!-- 化学品查询模块 -->
+                <div id="searchModule" class="content-module active">
+                    <div class="module-header">
+                        <h2><i class="fas fa-search"></i> 化学品查询</h2>
+                        <div class="module-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-database"></i>
+                                本地数据: <span id="localDbCount">-</span> 种
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="search-panel">
+                        <div class="search-input-group">
+                            <div class="input-wrapper">
+                                <i class="fas fa-search input-icon"></i>
+                                <input type="text" id="searchInput" placeholder="请输入化学品名称、CAS号或分子式..." autocomplete="off">
+                                <button class="clear-btn" onclick="clearSearch()">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <button id="searchBtn" class="primary-btn">
+                                <i class="fas fa-search"></i>
+                                <span>搜索</span>
+                            </button>
+                        </div>
+
+                        <!-- 搜索类型标签 -->
+                        <div class="search-types">
+                            <button class="type-btn active" data-type="name">
+                                <i class="fas fa-tag"></i>
+                                名称搜索
+                            </button>
+                            <button class="type-btn" data-type="cas">
+                                <i class="fas fa-barcode"></i>
+                                CAS号
+                            </button>
+                            <button class="type-btn" data-type="formula">
+                                <i class="fas fa-atom"></i>
+                                分子式
+                            </button>
+                            <button class="type-btn" data-type="fuzzy">
+                                <i class="fas fa-magic"></i>
+                                智能搜索
+                            </button>
+                        </div>
+
+                        <!-- 高级搜索 -->
+                        <div class="advanced-search-toggle">
+                            <button onclick="toggleAdvancedSearch()">
+                                <i class="fas fa-sliders-h"></i>
+                                高级搜索
+                                <i class="fas fa-chevron-down toggle-icon"></i>
+                            </button>
+                        </div>
+
+                        <div class="advanced-search-panel" id="advancedSearchPanel">
+                            <div class="advanced-row">
+                                <div class="form-group">
+                                    <label>分子量范围</label>
+                                    <div class="range-input">
+                                        <input type="number" placeholder="最小值" id="molWeightMin">
+                                        <span>-</span>
+                                        <input type="number" placeholder="最大值" id="molWeightMax">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>沸点范围 (°C)</label>
+                                    <div class="range-input">
+                                        <input type="number" placeholder="最小值" id="boilingPointMin">
+                                        <span>-</span>
+                                        <input type="number" placeholder="最大值" id="boilingPointMax">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="advanced-row">
+                                <div class="form-group">
+                                    <label>危险性分类</label>
+                                    <select id="hazardClass">
+                                        <option value="">所有分类</option>
+                                        <option value="explosive">爆炸品</option>
+                                        <option value="flammable">易燃品</option>
+                                        <option value="oxidizing">氧化剂</option>
+                                        <option value="toxic">毒害品</option>
+                                        <option value="corrosive">腐蚀品</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>应用领域</label>
+                                    <select id="applicationField">
+                                        <option value="">所有领域</option>
+                                        <option value="solvent">溶剂</option>
+                                        <option value="catalyst">催化剂</option>
+                                        <option value="intermediate">中间体</option>
+                                        <option value="additive">添加剂</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 搜索结果容器 -->
+                    <div id="searchResults" class="results-container">
+                        <div class="welcome-message">
+                            <div class="welcome-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <h3>欢迎使用化学品查询工具</h3>
+                            <p>输入化学品名称、CAS号或分子式开始查询</p>
+                            <div class="quick-examples">
+                                <span class="example-tag" onclick="quickSearch('7664-41-7')">氨气</span>
+                                <span class="example-tag" onclick="quickSearch('71-43-2')">苯</span>
+                                <span class="example-tag" onclick="quickSearch('67-56-1')">甲醇</span>
+                                <span class="example-tag" onclick="quickSearch('7782-50-5')">氯气</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 重大危险源模块 -->
+                <div id="hazardModule" class="content-module">
+                    <div class="module-header">
+                        <h2><i class="fas fa-exclamation-triangle"></i> 重大危险源评估</h2>
+                        <div class="module-stats">
+                            <span class="stat-item">
+                                <i class="fas fa-balance-scale"></i>
+                                标准: GB18218-2018
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 评估类型选择 -->
+                    <div class="assessment-types">
+                        <button class="assessment-type-btn active" onclick="switchAssessmentType('single')">
+                            <i class="fas fa-flask"></i>
+                            单一介质评估
+                        </button>
+                        <button class="assessment-type-btn" onclick="switchAssessmentType('multiple')">
+                            <i class="fas fa-layer-group"></i>
+                            多介质评估
+                        </button>
+                        <button class="assessment-type-btn" onclick="switchAssessmentType('standards')">
+                            <i class="fas fa-book"></i>
+                            法规标准
+                        </button>
+                    </div>
+
+                    <!-- 评估面板容器 -->
+                    <div class="assessment-panels">
+                        <!-- 单一介质评估面板 -->
+                        <div id="singleAssessmentPanel" class="assessment-panel active">
+                            <div class="form-card">
+                                <h3>单一介质重大危险源辨识</h3>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>
+                                            <i class="fas fa-barcode"></i>
+                                            CAS号
+                                        </label>
+                                        <input type="text" id="singleCAS" placeholder="例: 7664-41-7 (氨)" autocomplete="off">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <i class="fas fa-weight"></i>
+                                            实际存储量
+                                        </label>
+                                        <input type="number" id="singleQuantity" placeholder="数量" min="0" step="0.001">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>
+                                            <i class="fas fa-ruler"></i>
+                                            单位
+                                        </label>
+                                        <select id="singleUnit">
+                                            <option value="t">吨 (t)</option>
+                                            <option value="kg">千克 (kg)</option>
+                                            <option value="g">克 (g)</option>
+                                            <option value="L">升 (L)</option>
+                                            <option value="mL">毫升 (mL)</option>
+                                            <option value="m³">立方米 (m³)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button class="primary-btn full-width" onclick="assessSingleHazard()">
+                                    <i class="fas fa-calculator"></i>
+                                    开始评估
+                                </button>
+                            </div>
+                            <div id="singleHazardResult"></div>
+                        </div>
+
+                        <!-- 其他面板内容保持原有功能 -->
+                        <div id="multipleAssessmentPanel" class="assessment-panel">
+                            <div class="form-card">
+                                <h3>多介质重大危险源辨识</h3>
+                                <!-- 原有多介质评估内容 -->
+                                <div id="multipleChemicalInputs">
+                                    <div class="chemical-input-row">
+                                        <input type="text" placeholder="CAS号" class="multiple-cas">
+                                        <input type="number" placeholder="数量" class="multiple-quantity" min="0" step="0.001">
+                                        <select class="multiple-unit">
+                                            <option value="t">t</option>
+                                            <option value="kg">kg</option>
+                                            <option value="g">g</option>
+                                            <option value="L">L</option>
+                                        </select>
+                                        <button onclick="removeChemicalRow(this)" class="remove-btn">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="button-group">
+                                    <button onclick="addChemicalRow()" class="secondary-btn">
+                                        <i class="fas fa-plus"></i> 添加化学品
+                                    </button>
+                                    <button onclick="assessMultipleHazards()" class="primary-btn">
+                                        <i class="fas fa-calculator"></i> 评估
+                                    </button>
+                                    <button onclick="clearMultipleInputs()" class="secondary-btn">
+                                        <i class="fas fa-eraser"></i> 清空
+                                    </button>
+                                </div>
+                                <div id="multipleHazardResult"></div>
+                            </div>
+                        </div>
+
+                        <!-- 法规标准面板 -->
+                        <div id="standardsAssessmentPanel" class="assessment-panel">
+                            <div class="standards-grid">
+                                <div class="standard-card">
+                                    <h4><i class="fas fa-gavel"></i> GB18218-2018</h4>
+                                    <p><strong>危险化学品重大危险源辨识</strong></p>
+                                    <div class="standard-info">
+                                        <div class="info-item">
+                                            <span class="label">实施日期:</span>
+                                            <span class="value">2019-03-01</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">适用范围:</span>
+                                            <span class="value">危险化学品重大危险源辨识标准</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="standard-card">
+                                    <h4><i class="fas fa-shield-alt"></i> AQ3035-2010</h4>
+                                    <p><strong>危险化学品重大危险源安全监控通用技术规范</strong></p>
+                                    <div class="standard-info">
+                                        <div class="info-item">
+                                            <span class="label">实施日期:</span>
+                                            <span class="value">2011-01-01</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="label">适用范围:</span>
+                                            <span class="value">重大危险源安全监控技术要求</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hazard-levels-card">
+                                <h4><i class="fas fa-layer-group"></i> 重大危险源分级标准</h4>
+                                <div class="levels-grid">
+                                    <div class="level-card level-1">
+                                        <div class="level-number">1级</div>
+                                        <div class="level-info">
+                                            <div class="level-range">R ≥ 100</div>
+                                            <div class="level-desc">特别重大事故风险</div>
+                                        </div>
+                                    </div>
+                                    <div class="level-card level-2">
+                                        <div class="level-number">2级</div>
+                                        <div class="level-info">
+                                            <div class="level-range">100 > R ≥ 50</div>
+                                            <div class="level-desc">重大事故风险</div>
+                                        </div>
+                                    </div>
+                                    <div class="level-card level-3">
+                                        <div class="level-number">3级</div>
+                                        <div class="level-info">
+                                            <div class="level-range">50 > R ≥ 10</div>
+                                            <div class="level-desc">较大事故风险</div>
+                                        </div>
+                                    </div>
+                                    <div class="level-card level-4">
+                                        <div class="level-number">4级</div>
+                                        <div class="level-info">
+                                            <div class="level-range">10 > R ≥ 1</div>
+                                            <div class="level-desc">一般事故风险</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 其他模块容器 -->
+                <div id="toolsModule" class="content-module">
+                    <div class="module-header">
+                        <h2><i class="fas fa-calculator"></i> 计算工具</h2>
+                    </div>
+                    <div class="tools-grid">
+                        <div class="tool-card" onclick="openToolPanel('calculator')">
+                            <i class="fas fa-calculator"></i>
+                            <h3>化工计算</h3>
+                            <p>单位换算、浓度计算</p>
+                        </div>
+                        <div class="tool-card" onclick="openToolPanel('storage-check')">
+                            <i class="fas fa-warehouse"></i>
+                            <h3>储存兼容性</h3>
+                            <p>化学品储存安全检查</p>
+                        </div>
+                        <div class="tool-card" onclick="openToolPanel('sds-generator')">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>SDS生成</h3>
+                            <p>安全数据表生成工具</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="analysisModule" class="content-module">
+                    <div class="module-header">
+                        <h2><i class="fas fa-chart-line"></i> 风险分析</h2>
+                    </div>
+                    <div class="coming-soon">
+                        <i class="fas fa-tools"></i>
+                        <h3>功能开发中</h3>
+                        <p>GHS分类分析、储存兼容性矩阵等功能正在开发中...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 工具面板弹窗 -->
+        <div id="toolPanel" class="tool-panel">
+            <div class="panel-header">
+                <h3 id="toolPanelTitle">工具面板</h3>
+                <button class="close-btn" onclick="closeToolPanel()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="toolPanelContent" class="panel-content">
+                <!-- 动态内容 -->
+            </div>
+        </div>
+
+        <!-- 底部信息栏 -->
+        <footer class="footer-info">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>数据来源</h4>
+                    <div class="data-sources">
+                        <span class="source-tag">PubChem</span>
+                        <span class="source-tag">NIST</span>
+                        <span class="source-tag">ECHA</span>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>版本信息</h4>
+                    <p>v2.1.0 - GB18218-2018标准</p>
+                </div>
+                <div class="footer-section">
+                    <h4>安全提醒</h4>
+                    <p>⚠️ 本工具仅供参考，请查阅官方标准</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script type="module" src="src/js/optimized-app.js"></script>
+</body>
+</html>

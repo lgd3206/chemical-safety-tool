@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemSafe Pro - 专业化工安全工具平台</title>
+    <meta name="description" content="基于GB18218-2018和GBZ 2.1-2019标准的专业化工安全评估工具">
+    <meta name="keywords" content="化工安全,重大危险源,职业接触限值,MSDS,气体换算,防火间距">
+
+    <!-- 图标 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
+
+    <!-- 字体图标 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- 样式文件 -->
+    <style>
+        /* 重置样式 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 全局样式 */
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #10b981;
+            --danger-color: #ef4444;
+            --warning-color: #f59e0b;
+            --success-color: #10b981;
+            --text-color: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        /* 深色主题 */
+        .dark-theme {
+            --text-color: #f9fafb;
+            --text-secondary: #d1d5db;
+            --bg-color: #111827;
+            --bg-secondary: #1f2937;
+            --border-color: #374151;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: var(--transition);
+            line-height: 1.6;
+        }
+
+        /* 主容器 */
+        .chemsafe-main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 头部导航 */
+        .main-header {
+            background-color: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-section i {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .logo-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .version {
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .main-nav {
+            display: flex;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--text-color);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-toggle, .settings-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover, .settings-btn:hover {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        /* 主内容区域 */
+        .main-content {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .view-container {
+            display: none;
+        }
+
+        .view-container.active {
+            display: block;
+        }
+
+        /* 首页样式 */
+        .welcome-section {
+            text-align: center;
+            padding: 40px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+        }
+
+        .welcome-content h2 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        .feature-highlights {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .highlight-item i {
+            font-size: 16px;
+        }
+
+        /* 功能卡片 */
+        .features-section h3 {
+            font-size: 24px;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .feature-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-color);
+        }
+
+        .feature-card.major-hazard::before { background: var(--danger-color); }
+        .feature-card.oel-monitoring::before { background: var(--accent-color); }
+        .feature-card.msds-database::before { background: var(--secondary-color); }
+        .feature-card.gas-calculator::before { background: var(--warning-color); }
+        .feature-card.fire-distance::before { background: #8b5cf6; }
+        .feature-card.risk-assessment::before { background: #f97316; }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            background: var(--bg-secondary);
+        }
+
+        .major-hazard .card-icon { background: rgba(239, 68, 68, 0.1); color: var(--danger-color); }
+        .oel-monitoring .card-icon { background: rgba(16, 185, 129, 0.1); color: var(--accent-color); }
+        .msds-database .card-icon { background: rgba(59, 130, 246, 0.1); color: var(--secondary-color); }
+        .gas-calculator .card-icon { background: rgba(245, 158, 11, 0.1); color: var(--warning-color); }
+        .fire-distance .card-icon { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .risk-assessment .card-icon { background: rgba(249, 115, 22, 0.1); color: #f97316; }
+
+        .card-icon i {
+            font-size: 24px;
+        }
+
+        .card-content h4 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        .card-features {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .feature-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* 快速操作 */
+        .quick-actions h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+
+        .quick-action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .quick-btn {
+            padding: 12px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .quick-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* 模块容器 */
+        .module-container {
+            position: relative;
+        }
+
+        .module-back-btn {
+            position: fixed;
+            top: 80px;
+            left: 20px;
+            padding: 8px 16px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--shadow);
+            z-index: 10;
+        }
+
+        .module-back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 即将推出页面 */
+        .coming-soon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+        }
+
+        .coming-soon-content {
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .coming-soon-content i {
+            font-size: 64px;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .coming-soon-content h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .development-progress {
+            margin: 24px 0;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .btn-back {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-back:hover {
+            background: var(--secondary-color);
+        }
+
+        /* 底部状态栏 */
+        .main-footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 0;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .separator {
+            margin: 0 8px;
+        }
+
+        #status-indicator {
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 16px;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .main-content {
+                padding: 16px;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-highlights {
+                gap: 16px;
+            }
+
+            .quick-action-buttons {
+                justify-content: center;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .module-back-btn {
+                position: static;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* 工具视图样式 */
+        .tools-container h2 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .tool-categories {
+            display: grid;
+            gap: 32px;
+        }
+
+        .tool-category h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .tool-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tool-item:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tool-item i {
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* 标准库视图样式 */
+        .standards-container h2 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .standard-category {
+            margin-bottom: 32px;
+        }
+
+        .standard-category h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+
+        .standard-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .standard-info h4 {
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--text-color);
+        }
+
+        .standard-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .standard-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-view, .btn-use {
+            padding: 8px 16px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+        }
+
+        .btn-use {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-view:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* 帮助视图样式 */
+        .help-container h2 {
+            font-size: 28px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .help-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .help-section h3 {
+            font-size: 18px;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+
+        .help-section h4 {
+            font-size: 16px;
+            margin: 16px 0 8px;
+            color: var(--text-color);
+        }
+
+        .faq-item {
+            margin-bottom: 16px;
+        }
+
+        .faq-item h4 {
+            margin-bottom: 4px;
+        }
+
+        /* 加载动画 */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 主界面将通过JavaScript动态生成 -->
+
+    <!-- 加载提示 -->
+    <div id="loading-screen" style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    ">
+        <div style="text-align: center;">
+            <div class="loading"></div>
+            <p style="margin-top: 16px; color: var(--text-secondary);">正在加载 ChemSafe Pro...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript模块 -->
+    <script type="module" src="src/main-interface.js"></script>
+
+    <script>
+        // 页面加载完成后隐藏加载屏幕
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.style.opacity = '0';
+                    loadingScreen.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        loadingScreen.remove();
+                    }, 500);
+                }
+            }, 1000);
+        });
+
+        // 服务工作者注册（PWA支持）
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>
