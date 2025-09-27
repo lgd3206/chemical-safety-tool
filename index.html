@@ -530,6 +530,268 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        /* 模块内容样式 */
+        .module-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .module-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+        }
+
+        .module-header i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .module-header h2 {
+            margin: 10px 0 5px 0;
+            font-size: 1.8rem;
+        }
+
+        .module-header p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .assessment-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .assessment-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .assessment-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .search-controls {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .search-controls input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-controls input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 var(--border-radius) var(--border-radius);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background: var(--bg-secondary);
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .search-result-details {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .selected-chemical {
+            padding: 15px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .chemical-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .chemical-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+
+        .chemical-detail strong {
+            color: var(--text-color);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .input-unit {
+            font-weight: 600;
+            color: var(--text-secondary);
+            min-width: 30px;
+        }
+
+        .calculation-results {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .result-label {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .result-value {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .result-level {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .level-none {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .level-low {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .level-high {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .assessment-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1e3a8a;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--text-secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -873,26 +1135,51 @@
                         <div class="module-back-btn" onclick="backToHome()">
                             <i class="fas fa-arrow-left"></i> 返回首页
                         </div>
-                        <div class="coming-soon-container">
-                            <div class="coming-soon-content">
+                        <div class="module-content">
+                            <div class="module-header">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                <h2>重大危险源评估模块</h2>
-                                <p>基于GB18218-2018标准的完整评估功能正在加载中...</p>
-                                <div class="development-progress">
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 90%"></div>
+                                <h2>重大危险源评估</h2>
+                                <p>基于GB18218-2018标准</p>
+                            </div>
+
+                            <div class="assessment-container">
+                                <!-- 化学品选择区域 -->
+                                <div class="assessment-section">
+                                    <h3><i class="fas fa-flask"></i> 化学品信息</h3>
+                                    <div class="search-controls">
+                                        <input type="text" id="chemical-search" placeholder="输入化学品名称、CAS号或别名搜索..."
+                                               oninput="searchChemicals(this.value)">
+                                        <div id="search-results" class="search-results"></div>
                                     </div>
-                                    <span>功能完成度: 90%</span>
+                                    <div id="selected-chemical" class="selected-chemical"></div>
                                 </div>
-                                <div style="margin-top: 20px;">
-                                    <p><strong>已实现功能：</strong></p>
-                                    <ul style="text-align: left; margin-top: 10px;">
-                                        <li>✅ GB18218-2018标准85种化学品数据库</li>
-                                        <li>✅ S值自动计算（辨识指标）</li>
-                                        <li>✅ R值自动计算（分级指标）</li>
-                                        <li>✅ 危险源级别自动判定</li>
-                                        <li>🔄 评估报告生成（开发中）</li>
-                                    </ul>
+
+                                <!-- 存储量输入区域 -->
+                                <div class="assessment-section">
+                                    <h3><i class="fas fa-warehouse"></i> 实际存储量</h3>
+                                    <div class="input-group">
+                                        <input type="number" id="actual-quantity" placeholder="请输入实际存储量"
+                                               step="0.01" oninput="calculateHazardLevel()">
+                                        <span class="input-unit">吨</span>
+                                    </div>
+                                </div>
+
+                                <!-- 计算结果区域 -->
+                                <div class="assessment-section">
+                                    <h3><i class="fas fa-calculator"></i> 评估结果</h3>
+                                    <div id="calculation-results" class="calculation-results">
+                                        <p class="info-text">请选择化学品并输入存储量</p>
+                                    </div>
+                                </div>
+
+                                <!-- 评估按钮 -->
+                                <div class="assessment-actions">
+                                    <button class="btn btn-primary" onclick="performAssessment()">
+                                        <i class="fas fa-chart-line"></i> 开始评估
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="clearAssessment()">
+                                        <i class="fas fa-refresh"></i> 重置
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1007,6 +1294,217 @@
             alert('设置功能正在开发中...');
         }
 
+        // 重大危险源评估功能
+        let selectedChemical = null;
+        let gb18218Chemicals = [];
+
+        // 加载GB18218-2018化学品数据
+        async function loadGB18218Data() {
+            try {
+                const response = await fetch('./src/data/gb18218-chemicals.js');
+                const text = await response.text();
+                // 解析模块导出的数据
+                const moduleCode = text.replace('export const GB18218_TABLE1_CHEMICALS = ', 'window.GB18218_TABLE1_CHEMICALS = ');
+                eval(moduleCode);
+                gb18218Chemicals = window.GB18218_TABLE1_CHEMICALS || [];
+                console.log('GB18218数据加载完成，共', gb18218Chemicals.length, '种化学品');
+            } catch (error) {
+                console.error('加载GB18218数据失败:', error);
+                // 使用备用数据
+                gb18218Chemicals = [
+                    { id: 1, name: "氨", alias: "液氨;氨气", cas: "7664-41-7", threshold: 10 },
+                    { id: 2, name: "二氧化氮", alias: "氧化二氮", cas: "7783-41-7", threshold: 1 },
+                    { id: 3, name: "二氧化硫", alias: "亚硫酸酐", cas: "7446-09-5", threshold: 20 },
+                    { id: 4, name: "氟", alias: "", cas: "7782-41-4", threshold: 1 },
+                    { id: 5, name: "碳酰氯", alias: "光气", cas: "75-44-5", threshold: 0.3 },
+                    { id: 6, name: "环氧乙烷", alias: "氧化乙烯", cas: "75-21-8", threshold: 10 },
+                    { id: 7, name: "甲醇", alias: "甲醇", cas: "50-00-0", threshold: 5 },
+                    { id: 8, name: "磷化氢", alias: "磷化三氢;膦", cas: "7803-51-2", threshold: 1 }
+                ];
+            }
+        }
+
+        // 搜索化学品
+        function searchChemicals(query) {
+            const searchResults = document.getElementById('search-results');
+
+            if (!query || query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // 确保数据已加载
+            if (gb18218Chemicals.length === 0) {
+                loadGB18218Data();
+            }
+
+            const results = gb18218Chemicals.filter(chemical => {
+                const nameMatch = chemical.name.toLowerCase().includes(query.toLowerCase());
+                const casMatch = chemical.cas.includes(query);
+                const aliasMatch = chemical.alias && chemical.alias.toLowerCase().includes(query.toLowerCase());
+                return nameMatch || casMatch || aliasMatch;
+            });
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.slice(0, 10).map(chemical => `
+                    <div class="search-result-item" onclick="selectChemical(${chemical.id})">
+                        <div class="search-result-name">${chemical.name}</div>
+                        <div class="search-result-details">
+                            CAS: ${chemical.cas} | 临界量: ${chemical.threshold}吨
+                            ${chemical.alias ? ` | 别名: ${chemical.alias}` : ''}
+                        </div>
+                    </div>
+                `).join('');
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">未找到匹配的化学品</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+
+        // 选择化学品
+        function selectChemical(chemicalId) {
+            selectedChemical = gb18218Chemicals.find(c => c.id === chemicalId);
+            if (!selectedChemical) return;
+
+            // 隐藏搜索结果
+            document.getElementById('search-results').style.display = 'none';
+
+            // 更新搜索框值
+            document.getElementById('chemical-search').value = selectedChemical.name;
+
+            // 显示选中的化学品信息
+            document.getElementById('selected-chemical').innerHTML = `
+                <h4>${selectedChemical.name}</h4>
+                <div class="chemical-info">
+                    <div class="chemical-detail">
+                        <strong>CAS号:</strong>
+                        <span>${selectedChemical.cas}</span>
+                    </div>
+                    <div class="chemical-detail">
+                        <strong>临界量:</strong>
+                        <span>${selectedChemical.threshold} 吨</span>
+                    </div>
+                    ${selectedChemical.alias ? `
+                    <div class="chemical-detail">
+                        <strong>别名:</strong>
+                        <span>${selectedChemical.alias}</span>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+
+            // 自动计算
+            calculateHazardLevel();
+        }
+
+        // 计算重大危险源等级
+        function calculateHazardLevel() {
+            const actualQuantity = parseFloat(document.getElementById('actual-quantity').value);
+            const resultsContainer = document.getElementById('calculation-results');
+
+            if (!selectedChemical || !actualQuantity || actualQuantity <= 0) {
+                resultsContainer.innerHTML = '<p class="info-text">请选择化学品并输入有效的存储量</p>';
+                return;
+            }
+
+            // 计算S值 (辨识指标)
+            const sValue = actualQuantity / selectedChemical.threshold;
+
+            // 判断是否构成重大危险源
+            let hazardLevel, levelClass, hazardDescription;
+
+            if (sValue < 1) {
+                hazardLevel = "不构成重大危险源";
+                levelClass = "level-none";
+                hazardDescription = "该存储量未达到重大危险源辨识标准";
+            } else {
+                // 计算R值 (分级指标) - 简化版本，实际应考虑多种因素
+                let rValue = sValue;
+
+                if (rValue >= 100) {
+                    hazardLevel = "一级重大危险源";
+                    levelClass = "level-high";
+                    hazardDescription = "高度危险，需采取最严格的安全管理措施";
+                } else if (rValue >= 10) {
+                    hazardLevel = "二级重大危险源";
+                    levelClass = "level-high";
+                    hazardDescription = "中等危险，需采取严格的安全管理措施";
+                } else {
+                    hazardLevel = "三级重大危险源";
+                    levelClass = "level-low";
+                    hazardDescription = "一般危险，需采取相应的安全管理措施";
+                }
+            }
+
+            // 显示结果
+            resultsContainer.innerHTML = `
+                <div class="result-item">
+                    <span class="result-label">化学品名称:</span>
+                    <span class="result-value">${selectedChemical.name}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">实际存储量:</span>
+                    <span class="result-value">${actualQuantity} 吨</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">临界量:</span>
+                    <span class="result-value">${selectedChemical.threshold} 吨</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">S值 (辨识指标):</span>
+                    <span class="result-value">${sValue.toFixed(3)}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">评估结果:</span>
+                    <span class="result-level ${levelClass}">${hazardLevel}</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">说明:</span>
+                    <span style="color: var(--text-secondary); font-style: italic;">${hazardDescription}</span>
+                </div>
+            `;
+        }
+
+        // 执行评估
+        function performAssessment() {
+            if (!selectedChemical) {
+                alert('请先选择一个化学品');
+                return;
+            }
+
+            const actualQuantity = parseFloat(document.getElementById('actual-quantity').value);
+            if (!actualQuantity || actualQuantity <= 0) {
+                alert('请输入有效的存储量');
+                return;
+            }
+
+            calculateHazardLevel();
+            updateStatus(`已完成 ${selectedChemical.name} 的重大危险源评估`);
+        }
+
+        // 清除评估
+        function clearAssessment() {
+            selectedChemical = null;
+            document.getElementById('chemical-search').value = '';
+            document.getElementById('actual-quantity').value = '';
+            document.getElementById('selected-chemical').innerHTML = '';
+            document.getElementById('search-results').style.display = 'none';
+            document.getElementById('calculation-results').innerHTML = '<p class="info-text">请选择化学品并输入存储量</p>';
+            updateStatus('评估已重置');
+        }
+
+        // 隐藏搜索结果（点击外部时）
+        document.addEventListener('click', function(e) {
+            const searchContainer = e.target.closest('.search-controls');
+            if (!searchContainer) {
+                const searchResults = document.getElementById('search-results');
+                if (searchResults) {
+                    searchResults.style.display = 'none';
+                }
+            }
+        });
+
         // 页面加载时初始化
         document.addEventListener('DOMContentLoaded', function() {
             // 恢复主题设置
@@ -1026,6 +1524,9 @@
                     }
                 });
             });
+
+            // 初始化GB18218数据
+            loadGB18218Data();
 
             updateStatus('ChemSafe Pro v3.0 已启动');
             console.log('ChemSafe Pro 初始化完成');
