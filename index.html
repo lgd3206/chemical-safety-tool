@@ -3922,14 +3922,13 @@
                                     }
                                 } catch (error) {
                                     console.error('加载MSDS模块失败:', error);
-                                    document.getElementById('msdsModuleContainer').innerHTML = \\\`
-                                        <div class="module-error">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                            <h3>模块加载失败</h3>
-                                            <p>MSDS数据库模块加载失败，请刷新页面重试</p>
-                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
-                                        </div>
-                                    \\\`;
+                                    document.getElementById('msdsModuleContainer').innerHTML =
+                                        '<div class="module-error">' +
+                                            '<i class="fas fa-exclamation-triangle"></i>' +
+                                            '<h3>模块加载失败</h3>' +
+                                            '<p>MSDS数据库模块加载失败，请刷新页面重试</p>' +
+                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                        '</div>';
                                 }
                             })();
                         </script>
@@ -3958,14 +3957,13 @@
                                     }
                                 } catch (error) {
                                     console.error('加载气体换算模块失败:', error);
-                                    document.getElementById('gasCalcModuleContainer').innerHTML = \\\`
-                                        <div class="module-error">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                            <h3>模块加载失败</h3>
-                                            <p>气体换算工具模块加载失败，请刷新页面重试</p>
-                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
-                                        </div>
-                                    \\\`;
+                                    document.getElementById('gasCalcModuleContainer').innerHTML =
+                                        '<div class="module-error">' +
+                                            '<i class="fas fa-exclamation-triangle"></i>' +
+                                            '<h3>模块加载失败</h3>' +
+                                            '<p>气体换算工具模块加载失败，请刷新页面重试</p>' +
+                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                        '</div>';
                                 }
                             })();
                         </script>
@@ -3994,14 +3992,13 @@
                                     }
                                 } catch (error) {
                                     console.error('加载防火间距模块失败:', error);
-                                    document.getElementById('fireDistanceModuleContainer').innerHTML = \\\`
-                                        <div class="module-error">
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                            <h3>模块加载失败</h3>
-                                            <p>防火间距计算模块加载失败，请刷新页面重试</p>
-                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
-                                        </div>
-                                    \\\`;
+                                    document.getElementById('fireDistanceModuleContainer').innerHTML =
+                                        '<div class="module-error">' +
+                                            '<i class="fas fa-exclamation-triangle"></i>' +
+                                            '<h3>模块加载失败</h3>' +
+                                            '<p>防火间距计算模块加载失败，请刷新页面重试</p>' +
+                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                        '</div>';
                                 }
                             })();
                         </script>
