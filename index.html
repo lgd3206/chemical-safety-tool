@@ -60,7 +60,10 @@
             "职业接触限值查询 - GBZ2.1-2019标准",
             "MSDS化学品数据库查询",
             "气体换算计算器",
-            "防火间距计算工具"
+            "防火间距计算工具",
+            "安全资料一站式获取",
+            "安全培训PPT生成",
+            "安全生产事故警示教育"
         ],
         "keywords": "化工安全,重大危险源,GB18218-2018,安全生产费用,职业接触限值,危险化学品",
         "inLanguage": "zh-CN",
@@ -316,7 +319,7 @@
 
         .feature-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: var(--spacing-lg);
             max-width: 1400px;
             margin: 0 auto var(--spacing-2xl) auto;
@@ -327,12 +330,12 @@
             background: var(--bg-color);
             border: 1px solid var(--border-light);
             border-radius: var(--border-radius-lg);
-            padding: var(--spacing-xl) var(--spacing-lg);
-            min-height: 200px;
+            padding: var(--spacing-lg);
+            min-height: 220px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
+            align-items: center;
+            text-align: center;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: var(--shadow);
             cursor: pointer;
@@ -419,97 +422,164 @@
             border-color: #8b5cf6;
         }
 
+        .feature-card.safety-resources::before {
+            background: #06b6d4;
+        }
+
+        .feature-card.safety-resources:hover {
+            border-color: #06b6d4;
+        }
+
+        .feature-card.ppt-generator::before {
+            background: #f59e0b;
+        }
+
+        .feature-card.ppt-generator:hover {
+            border-color: #f59e0b;
+        }
+
+        .feature-card.accident-education::before {
+            background: #dc2626;
+        }
+
+        .feature-card.accident-education:hover {
+            border-color: #dc2626;
+        }
+
         .card-icon {
-            width: 64px;
-            height: 64px;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border-radius: var(--border-radius);
-            margin-bottom: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
             transition: all 0.3s ease;
+        }
+
+        /* 重大危险源评估 - 红色警示 */
+        .major-hazard .card-icon {
+            background: linear-gradient(135deg, #dc2626, #ef4444);
+        }
+
+        /* 职业接触限值查询 - 绿色健康 */
+        .oel-monitoring .card-icon {
+            background: linear-gradient(135deg, #059669, #10b981);
+        }
+
+        /* MSDS数据库 - 蓝色信息 */
+        .msds-database .card-icon {
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+        }
+
+        /* 气体换算工具 - 橙色工具 */
+        .gas-calculator .card-icon {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+        }
+
+        /* 防火间距计算 - 深红色防火 */
+        .fire-distance .card-icon {
+            background: linear-gradient(135deg, #b91c1c, #dc2626);
+        }
+
+        /* 安全生产费用提取 - 金色财务 */
+        .safety-fee .card-icon {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+        }
+
+        /* 风险评估工具 - 紫色分析 */
+        .risk-assessment .card-icon {
+            background: linear-gradient(135deg, #7c3aed, #8b5cf6);
+        }
+
+        /* 安全资料一站式获取 - 青色资源 */
+        .safety-resources .card-icon {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+        }
+
+        /* 安全培训PPT生成 - 琥珀色创作 */
+        .ppt-generator .card-icon {
+            background: linear-gradient(135deg, #d97706, #f59e0b);
+        }
+
+        /* 安全生产事故警示教育 - 深红色警示 */
+        .accident-education .card-icon {
+            background: linear-gradient(135deg, #991b1b, #dc2626);
         }
 
         .feature-card:hover .card-icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 悬停时的安全色彩阴影效果 */
+        .major-hazard:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(220, 38, 38, 0.4);
+        }
+
+        .oel-monitoring:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+        }
+
+        .msds-database:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        .gas-calculator:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(234, 88, 12, 0.4);
+        }
+
+        .fire-distance:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(185, 28, 28, 0.4);
+        }
+
+        .safety-fee:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+        }
+
+        .risk-assessment:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+        }
+
+        .safety-resources:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(8, 145, 178, 0.4);
+        }
+
+        .ppt-generator:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(217, 119, 6, 0.4);
+        }
+
+        .accident-education:hover .card-icon {
+            box-shadow: 0 8px 25px rgba(153, 27, 27, 0.4);
         }
 
         .card-icon i {
-            font-size: 28px;
+            font-size: 36px;
         }
 
         .card-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
+            align-items: center;
             width: 100%;
+            text-align: center;
         }
 
         .card-content h4 {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 600;
             color: var(--text-color);
             margin-bottom: var(--spacing-sm);
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         .card-content p {
             color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: var(--spacing-md);
-            font-size: 0.95rem;
-        }
-
-        .card-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--spacing-xs);
-            margin-bottom: var(--spacing-md);
-        }
-
-        .feature-tag {
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            padding: 4px 10px;
-            border-radius: 16px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            border: 1px solid var(--border-color);
-            transition: all 0.2s ease;
-        }
-
-        .feature-card:hover .feature-tag {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-1px);
-        }
-
-        .card-action {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-weight: 500;
-            color: var(--primary-color);
-            margin-top: auto;
-            padding-top: var(--spacing-sm);
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover .card-action {
-            color: var(--secondary-color);
-        }
-
-        .card-action i {
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover .card-action i {
-            transform: translateX(4px);
+            line-height: 1.5;
+            margin-bottom: 0;
+            font-size: 0.9rem;
         }
 
         /* SEO内容区域样式 */
@@ -592,9 +662,9 @@
         }
 
         .quick-action-buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-md);
         }
 
         .quick-btn {
@@ -775,7 +845,7 @@
 
             .feature-card {
                 padding: var(--spacing-lg);
-                min-height: 180px;
+                min-height: 160px;
             }
 
             .card-icon {
@@ -830,7 +900,7 @@
 
             .feature-card {
                 padding: var(--spacing-md);
-                min-height: 160px;
+                min-height: 140px;
             }
 
             .card-icon {
@@ -3265,140 +3335,110 @@
                             <!-- 重大危险源评估 -->
                             <div class="feature-card major-hazard" onclick="loadModule('majorHazard')">
                                 <div class="card-icon">
-                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <i class="fas fa-radiation-alt"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>重大危险源评估</h4>
                                     <p>基于GB18218-2018标准，智能辨识和分级评估重大危险源</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">辨识计算</span>
-                                        <span class="feature-tag">分级评估</span>
-                                        <span class="feature-tag">报告生成</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- 职业接触限值查询 -->
                             <div class="feature-card oel-monitoring" onclick="loadModule('oelMonitoring')">
                                 <div class="card-icon">
-                                    <i class="fas fa-lungs"></i>
+                                    <i class="fas fa-user-shield"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>职业接触限值查询</h4>
                                     <p>基于GBZ 2.1-2019标准，查询化学品职业接触限值和暴露评估</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">限值查询</span>
-                                        <span class="feature-tag">单位换算</span>
-                                        <span class="feature-tag">暴露评估</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- MSDS数据库 -->
                             <div class="feature-card msds-database" onclick="loadModule('msdsDatabase')">
                                 <div class="card-icon">
-                                    <i class="fas fa-file-alt"></i>
+                                    <i class="fas fa-database"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>MSDS数据库</h4>
                                     <p>化学品安全数据表查询，支持中英文名称和CAS号搜索</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">智能搜索</span>
-                                        <span class="feature-tag">GHS分类</span>
-                                        <span class="feature-tag">安全信息</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- 气体换算工具 -->
                             <div class="feature-card gas-calculator" onclick="loadModule('gasCalculator')">
                                 <div class="card-icon">
-                                    <i class="fas fa-exchange-alt"></i>
+                                    <i class="fas fa-flask"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>气体换算工具</h4>
                                     <p>可燃有毒气体浓度单位转换，支持温度压力修正</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">单位转换</span>
-                                        <span class="feature-tag">条件修正</span>
-                                        <span class="feature-tag">混合计算</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- 防火间距计算 -->
                             <div class="feature-card fire-distance" onclick="loadModule('fireDistance')">
                                 <div class="card-icon">
-                                    <i class="fas fa-ruler"></i>
+                                    <i class="fas fa-fire-extinguisher"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>防火间距计算</h4>
                                     <p>建筑防火间距自动计算，符合GB 50016标准要求</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">间距计算</span>
-                                        <span class="feature-tag">规范查询</span>
-                                        <span class="feature-tag">图形展示</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- 安全生产费用提取 -->
                             <div class="feature-card safety-fee" onclick="loadModule('safetyFee')">
                                 <div class="card-icon">
-                                    <i class="fas fa-calculator"></i>
+                                    <i class="fas fa-coins"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>安全生产费用提取</h4>
                                     <p>基于财资〔2022〕136号文件的费用提取标准计算</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">分段计算</span>
-                                        <span class="feature-tag">标准查询</span>
-                                        <span class="feature-tag">快速计算</span>
-                                    </div>
-                                </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
                                 </div>
                             </div>
 
                             <!-- 风险评估工具 -->
                             <div class="feature-card risk-assessment" onclick="loadModule('riskAssessment')">
                                 <div class="card-icon">
-                                    <i class="fas fa-chart-pie"></i>
+                                    <i class="fas fa-chart-line"></i>
                                 </div>
                                 <div class="card-content">
                                     <h4>风险评估工具</h4>
                                     <p>多维度安全风险分析，生成专业评估报告</p>
-                                    <div class="card-features">
-                                        <span class="feature-tag">风险矩阵</span>
-                                        <span class="feature-tag">定量评估</span>
-                                        <span class="feature-tag">控制措施</span>
-                                    </div>
                                 </div>
-                                <div class="card-action">
-                                    <span>立即使用</span>
-                                    <i class="fas fa-arrow-right"></i>
+                            </div>
+
+                            <!-- 安全资料一站式获取 -->
+                            <div class="feature-card safety-resources" onclick="loadModule('safetyResources')">
+                                <div class="card-icon">
+                                    <i class="fas fa-cloud-download-alt"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>安全资料一站式获取</h4>
+                                    <p>汇聚各类安全生产资料，提供便捷的资源下载服务</p>
+                                </div>
+                            </div>
+
+                            <!-- 安全培训PPT生成 -->
+                            <div class="feature-card ppt-generator" onclick="loadModule('pptGenerator')">
+                                <div class="card-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>安全培训PPT生成</h4>
+                                    <p>基于AI技术，快速生成专业的安全培训演示文稿</p>
+                                </div>
+                            </div>
+
+                            <!-- 安全生产事故警示教育 -->
+                            <div class="feature-card accident-education" onclick="loadModule('accidentEducation')">
+                                <div class="card-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>安全生产事故警示教育</h4>
+                                    <p>最新事故调查报告和警示教育视频，以案警示强化安全意识</p>
                                 </div>
                             </div>
                         </div>
@@ -3858,6 +3898,84 @@
                         }
                     }, 100);
                     break;
+                case 'safetyResources':
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div class="coming-soon-container">' +
+                            '<div class="coming-soon-content">' +
+                                '<i class="fas fa-cloud-download-alt"></i>' +
+                                '<h2>安全资料一站式获取</h2>' +
+                                '<p>连接至资源站点 www.ziyuanso.net</p>' +
+                                '<div class="development-progress">' +
+                                    '<div class="progress-bar">' +
+                                        '<div class="progress-fill" style="width: 30%"></div>' +
+                                    '</div>' +
+                                    '<span>开发进度: 30%</span>' +
+                                '</div>' +
+                                '<button class="btn btn-primary" onclick="window.open(\'http://www.ziyuanso.net\', \'_blank\')">' +
+                                    '<i class="fas fa-external-link-alt"></i> 访问资源站点' +
+                                '</button>' +
+                            '</div>' +
+                        '</div>';
+                    break;
+                case 'pptGenerator':
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div class="coming-soon-container">' +
+                            '<div class="coming-soon-content">' +
+                                '<i class="fas fa-presentation"></i>' +
+                                '<h2>安全培训PPT生成</h2>' +
+                                '<p>基于AI技术的培训课件生成工具正在开发中...</p>' +
+                                '<div class="development-progress">' +
+                                    '<div class="progress-bar">' +
+                                        '<div class="progress-fill" style="width: 20%"></div>' +
+                                    '</div>' +
+                                    '<span>开发进度: 20%</span>' +
+                                '</div>' +
+                                '<div style="margin-top: 20px;">' +
+                                    '<p><strong>即将实现功能：</strong></p>' +
+                                    '<ul style="text-align: left; margin-top: 10px;">' +
+                                        '<li>📝 AI内容生成</li>' +
+                                        '<li>🎨 模板自定义</li>' +
+                                        '<li>📊 数据可视化</li>' +
+                                        '<li>💾 多格式导出</li>' +
+                                    '</ul>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                    break;
+                case 'accidentEducation':
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div class="coming-soon-container">' +
+                            '<div class="coming-soon-content">' +
+                                '<i class="fas fa-exclamation-circle"></i>' +
+                                '<h2>安全生产事故警示教育</h2>' +
+                                '<p>事故调查报告和警示教育视频资源库正在建设中...</p>' +
+                                '<div class="development-progress">' +
+                                    '<div class="progress-bar">' +
+                                        '<div class="progress-fill" style="width: 15%"></div>' +
+                                    '</div>' +
+                                    '<span>开发进度: 15%</span>' +
+                                '</div>' +
+                                '<div style="margin-top: 20px;">' +
+                                    '<p><strong>将提供资源：</strong></p>' +
+                                    '<ul style="text-align: left; margin-top: 10px;">' +
+                                        '<li>📄 最新事故调查报告</li>' +
+                                        '<li>🎥 警示教育视频</li>' +
+                                        '<li>📈 事故统计分析</li>' +
+                                        '<li>💡 预防措施建议</li>' +
+                                    '</ul>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>';
+                    break;
                 default:
                     moduleContent = `
                         <div class="module-back-btn" onclick="backToHome()">
@@ -3903,7 +4021,10 @@
                 msdsDatabase: 'MSDS数据库',
                 gasCalculator: '气体换算工具',
                 fireDistance: '防火间距计算',
-                riskAssessment: '风险评估工具'
+                riskAssessment: '风险评估工具',
+                safetyResources: '安全资料一站式获取',
+                pptGenerator: '安全培训PPT生成',
+                accidentEducation: '安全生产事故警示教育'
             };
             return names[moduleId] || '未知模块';
         }
