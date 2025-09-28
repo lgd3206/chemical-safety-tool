@@ -1,0 +1,48 @@
+User-agent: *
+Allow: /
+
+# 重要页面优先抓取
+Crawl-delay: 1
+
+# 禁止抓取的目录和文件
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: *.tmp
+Disallow: *.log
+Disallow: *.bak
+
+# 允许抓取重要的静态资源
+Allow: /assets/
+Allow: /src/
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.png
+Allow: *.gif
+Allow: *.svg
+
+# Sitemap位置
+Sitemap: https://chemsafe-pro.com/sitemap.xml
+
+# 特定搜索引擎的额外指令
+# 百度搜索引擎
+User-agent: Baiduspider
+Crawl-delay: 1
+Allow: /
+
+# 360搜索引擎
+User-agent: 360Spider
+Crawl-delay: 1
+Allow: /
+
+# 搜狗搜索引擎
+User-agent: Sogou web spider
+Crawl-delay: 1
+Allow: /
+
+# 神马搜索引擎
+User-agent: YisouSpider
+Crawl-delay: 1
+Allow: /

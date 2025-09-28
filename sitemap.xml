@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- 首页 -->
+  <url>
+    <loc>https://chemsafe-pro.com/</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- 重大危险源评估功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/major-hazard-assessment</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 安全生产费用计算功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/safety-fee-calculation</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- 职业接触限值查询功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/oel-monitoring</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- MSDS数据库功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/msds-database</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 气体换算计算器功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/gas-calculator</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 防火间距计算功能页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/fire-distance</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- 关于我们页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/about</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- 帮助文档页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/help</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 标准库页面 -->
+  <url>
+    <loc>https://chemsafe-pro.com/standards</loc>
+    <lastmod>2024-12-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>

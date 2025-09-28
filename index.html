@@ -3,9 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChemSafe Pro - 专业化工安全工具平台</title>
-    <meta name="description" content="基于GB18218-2018和GBZ 2.1-2019标准的专业化工安全评估工具">
-    <meta name="keywords" content="化工安全,重大危险源,职业接触限值,MSDS,气体换算,防火间距">
+    <title>ChemSafe Pro - 专业化工安全工具平台 | 重大危险源评估 | 安全生产费用计算</title>
+
+    <!-- SEO Meta标签 -->
+    <meta name="description" content="专业化工安全评估工具平台，基于GB18218-2018和GBZ2.1-2019国家标准，提供重大危险源评估、安全生产费用计算、职业接触限值查询等功能。支持危险化学品企业安全管理和合规评估。">
+    <meta name="keywords" content="化工安全,重大危险源评估,GB18218-2018,安全生产费用计算,职业接触限值,GBZ2.1-2019,MSDS查询,化学品安全,危险化学品管理,化工企业安全评估工具,财资2022年136号">
+    <meta name="author" content="ChemSafe Pro">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="zh-CN">
+    <meta name="theme-color" content="#2563EB">
+
+    <!-- Open Graph Meta标签 -->
+    <meta property="og:title" content="ChemSafe Pro - 专业化工安全工具平台">
+    <meta property="og:description" content="基于国家标准的化工安全评估与计算工具，提供重大危险源评估、安全生产费用计算等专业功能">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chemsafe-pro.com">
+    <meta property="og:image" content="https://chemsafe-pro.com/assets/og-image.jpg">
+    <meta property="og:site_name" content="ChemSafe Pro">
+    <meta property="og:locale" content="zh_CN">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ChemSafe Pro - 专业化工安全工具平台">
+    <meta name="twitter:description" content="专业化工安全评估工具，支持重大危险源评估、安全生产费用计算等国家标准功能">
+    <meta name="twitter:image" content="https://chemsafe-pro.com/assets/twitter-image.jpg">
+
+    <!-- 预加载和性能优化 -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+
+    <!-- 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ChemSafe Pro",
+        "alternateName": "化工安全专业工具平台",
+        "description": "专业化工安全评估工具平台，基于GB18218-2018和GBZ2.1-2019国家标准",
+        "url": "https://chemsafe-pro.com",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "HTML5, CSS3, JavaScript",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "CNY",
+            "availability": "https://schema.org/InStock"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ChemSafe Pro Team"
+        },
+        "featureList": [
+            "重大危险源评估 - GB18218-2018标准",
+            "安全生产费用计算 - 财资〔2022〕136号",
+            "职业接触限值查询 - GBZ2.1-2019标准",
+            "MSDS化学品数据库查询",
+            "气体换算计算器",
+            "防火间距计算工具"
+        ],
+        "keywords": "化工安全,重大危险源,GB18218-2018,安全生产费用,职业接触限值,危险化学品",
+        "inLanguage": "zh-CN",
+        "isAccessibleForFree": true,
+        "datePublished": "2024-01-01",
+        "dateModified": "2024-12-27"
+    }
+    </script>
 
     <!-- 图标 -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧪</text></svg>">
@@ -24,21 +87,34 @@
 
         /* 全局样式 */
         :root {
-            --primary-color: #1e40af;
-            --secondary-color: #3b82f6;
-            --accent-color: #10b981;
-            --danger-color: #ef4444;
-            --warning-color: #f59e0b;
-            --success-color: #10b981;
-            --text-color: #1f2937;
-            --text-secondary: #6b7280;
-            --bg-color: #ffffff;
-            --bg-secondary: #f9fafb;
-            --border-color: #e5e7eb;
-            --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
+            --primary-color: #2563EB;
+            --secondary-color: #3B82F6;
+            --accent-color: #10B981;
+            --danger-color: #EF4444;
+            --warning-color: #F59E0B;
+            --success-color: #10B981;
+            --text-color: #1F2937;
+            --text-secondary: #6B7280;
+            --text-light: #9CA3AF;
+            --bg-color: #FFFFFF;
+            --bg-secondary: #F8FAFC;
+            --bg-tertiary: #F1F5F9;
+            --border-color: #E2E8F0;
+            --border-light: #F1F5F9;
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --border-radius-sm: 8px;
+            --border-radius-lg: 16px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            --spacing-2xl: 48px;
         }
 
         /* 深色主题 */
@@ -187,54 +263,378 @@
         /* 首页样式 */
         .welcome-section {
             text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-            color: white;
-            border-radius: var(--border-radius);
-            margin-bottom: 40px;
+            padding: var(--spacing-2xl) 0;
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-color));
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-2xl);
+            border: 1px solid var(--border-light);
         }
 
         .welcome-content h2 {
-            font-size: 32px;
-            margin-bottom: 8px;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-color);
         }
 
         .subtitle {
             font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 24px;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            font-weight: 400;
         }
 
         .feature-highlights {
             display: flex;
             justify-content: center;
-            gap: 32px;
+            gap: var(--spacing-2xl);
             flex-wrap: wrap;
         }
 
         .highlight-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: var(--spacing-sm);
             font-size: 14px;
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         .highlight-item i {
             font-size: 16px;
+            color: var(--primary-color);
         }
 
         /* 功能卡片 */
-        .features-section h3 {
-            font-size: 24px;
-            margin-bottom: 24px;
+        .features-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-xl);
             color: var(--text-color);
+            text-align: center;
         }
 
         .feature-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 24px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            max-width: 1400px;
+            margin: 0 auto var(--spacing-2xl) auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .feature-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-xl) var(--spacing-lg);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card.major-hazard::before {
+            background: var(--danger-color);
+        }
+
+        .feature-card.major-hazard:hover {
+            border-color: var(--danger-color);
+        }
+
+        .feature-card.oel-monitoring::before {
+            background: var(--accent-color);
+        }
+
+        .feature-card.oel-monitoring:hover {
+            border-color: var(--accent-color);
+        }
+
+        .feature-card.msds-database::before {
+            background: var(--secondary-color);
+        }
+
+        .feature-card.msds-database:hover {
+            border-color: var(--secondary-color);
+        }
+
+        .feature-card.gas-calculator::before {
+            background: var(--warning-color);
+        }
+
+        .feature-card.gas-calculator:hover {
+            border-color: var(--warning-color);
+        }
+
+        .feature-card.fire-distance::before {
+            background: #e74c3c;
+        }
+
+        .feature-card.fire-distance:hover {
+            border-color: #e74c3c;
+        }
+
+        .feature-card.safety-fee::before {
+            background: var(--success-color);
+        }
+
+        .feature-card.safety-fee:hover {
+            border-color: var(--success-color);
+        }
+
+        .feature-card.risk-assessment::before {
+            background: #8b5cf6;
+        }
+
+        .feature-card.risk-assessment:hover {
+            border-color: #8b5cf6;
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-md);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .card-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-icon i {
+            font-size: 28px;
+        }
+
+        .card-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .card-content h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.3;
+        }
+
+        .card-content p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-md);
+            font-size: 0.95rem;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .feature-tag {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 4px 10px;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover .feature-tag {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-1px);
+        }
+
+        .card-action {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-top: auto;
+            padding-top: var(--spacing-sm);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .card-action {
+            color: var(--secondary-color);
+        }
+
+        .card-action i {
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .card-action i {
+            transform: translateX(4px);
+        }
+
+        .card-content h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.3;
+        }
+
+        .card-content p {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+            margin-bottom: var(--spacing-md);
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .card-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .feature-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 9px;
+            font-weight: 500;
+        }
+
+        .card-action {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            color: var(--primary-color);
+            font-size: 11px;
+            font-weight: 600;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover .card-action {
+            opacity: 1;
+            transform: translateX(2px);
+        }
+
+        /* SEO内容区域样式 */
+        .seo-content-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .seo-content h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-lg);
+            text-align: center;
+        }
+
+        .seo-content > p {
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xl);
+            text-align: center;
+        }
+
+        .seo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .seo-feature-item {
+            padding: var(--spacing-lg);
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .seo-feature-item h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .seo-feature-item p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .seo-keywords {
+            background: var(--bg-tertiary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        .seo-keywords h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .seo-keywords p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
         }
 
         .feature-card {
@@ -293,7 +693,7 @@
             font-size: 24px;
         }
 
-        .card-content h4 {
+        .card-content h3 {
             font-size: 18px;
             margin-bottom: 8px;
             color: var(--text-color);
@@ -332,7 +732,7 @@
         }
 
         /* 快速操作 */
-        .quick-actions h3 {
+        .quick-actions h4 {
             font-size: 20px;
             margin-bottom: 16px;
             color: var(--text-color);
@@ -479,6 +879,14 @@
         }
 
         /* 响应式设计 */
+        @media (max-width: 1199px) {
+            .feature-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-lg);
+                padding: 0 var(--spacing-md);
+            }
+        }
+
         @media (max-width: 768px) {
             .header-content {
                 padding: 0 16px;
@@ -489,11 +897,158 @@
             }
 
             .main-content {
+                padding: var(--spacing-md) 0;
+            }
+
+            .welcome-section {
+                padding: var(--spacing-xl) var(--spacing-md);
+                text-align: center;
+            }
+
+            .welcome-content h1 {
+                font-size: 1.8rem;
+                line-height: 1.3;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .feature-cards {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+                padding: 0 var(--spacing-md);
+            }
+
+            .feature-card {
+                padding: var(--spacing-lg);
+                min-height: 180px;
+            }
+
+            .card-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .card-icon i {
+                font-size: 24px;
+            }
+
+            .card-content h4 {
+                font-size: 1.2rem;
+            }
+
+            .card-content p {
+                font-size: 0.9rem;
+            }
+
+            .quick-actions {
+                padding: 0 var(--spacing-md);
+            }
+
+            .quick-action-buttons {
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--spacing-sm);
+            }
+
+            .seo-content-section {
+                padding: 0 var(--spacing-md);
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: var(--spacing-sm);
+                text-align: center;
+            }
+
+            .footer-content .separator {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .welcome-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .quick-action-buttons {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: var(--spacing-md);
+                min-height: 160px;
+            }
+
+            .card-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .card-icon i {
+                font-size: 20px;
+            }
+
+            .card-content h4 {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* 动画优化 */
+        @media (prefers-reduced-motion: reduce) {
+            .feature-card,
+            .card-icon,
+            .feature-tag,
+            .card-action i {
+                transition: none;
+            }
+
+            .feature-card:hover {
+                transform: none;
+            }
+
+            .feature-card:hover .card-icon {
+                transform: none;
+            }
+
+            .feature-card:hover .feature-tag {
+                transform: none;
+            }
+
+            .feature-card:hover .card-action i {
+                transform: none;
+            }
+        }
+
+        /* 加载动画 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-card:nth-child(6) { animation-delay: 0.6s; }
+        .feature-card:nth-child(7) { animation-delay: 0.7s; }
                 padding: 16px;
             }
 
             .feature-cards {
                 grid-template-columns: 1fr;
+                gap: var(--spacing-md);
             }
 
             .feature-highlights {
@@ -576,7 +1131,7 @@
             box-shadow: var(--shadow);
         }
 
-        .assessment-section h3 {
+        .assessment-section h4 {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -792,6 +1347,1983 @@
             background: #4b5563;
             transform: translateY(-2px);
         }
+
+        /* 安全生产费用提取模块样式 */
+        .safety-fee-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .fee-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .fee-section h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .company-type-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .type-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 15px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .type-option:hover {
+            border-color: var(--primary-color);
+            background: rgba(30, 64, 175, 0.05);
+        }
+
+        .type-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .type-option input[type="radio"]:checked + .option-text {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .option-text {
+            font-size: 0.95rem;
+            color: var(--text-color);
+        }
+
+        .revenue-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .revenue-input-group input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .revenue-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+        }
+
+        .fee-standards {
+            background: var(--bg-secondary);
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .fee-standards h4 {
+            margin-bottom: 15px;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .standards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+
+        .standard-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: var(--bg-color);
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+
+        .standard-range {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .standard-rate {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .fee-results {
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .fee-result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .fee-result-label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .fee-result-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .fee-highlight {
+            background: linear-gradient(135deg, var(--accent-color), #059669);
+            color: white;
+            border-left: 4px solid #047857;
+        }
+
+        .fee-highlight .fee-result-label,
+        .fee-highlight .fee-result-value {
+            color: white;
+        }
+
+        .fee-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .company-type-options {
+                grid-template-columns: 1fr;
+            }
+
+            .standards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .fee-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* 分阶段计算详情样式 */
+        .calculation-breakdown {
+            width: 100%;
+        }
+
+        .breakdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breakdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .breakdown-range {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            min-width: 120px;
+        }
+
+        .breakdown-calculation {
+            font-size: 0.9rem;
+            text-align: right;
+            color: var(--text-color);
+        }
+
+        .breakdown-total {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 2px solid var(--primary-color);
+            text-align: right;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .breakdown-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .breakdown-calculation {
+                text-align: left;
+                width: 100%;
+            }
+        }
+
+        /* MSDS数据库模块样式 */
+        .msds-database-container {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: var(--spacing-lg);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .msds-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .msds-header h2 {
+            margin-bottom: var(--spacing-sm);
+            font-size: 2rem;
+        }
+
+        .msds-search-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .search-tabs {
+            display: flex;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-tab {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .search-tab:hover {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .search-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .search-tab-content {
+            display: none;
+            padding: var(--spacing-lg);
+        }
+
+        .search-tab-content.active {
+            display: block;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .search-input-group input {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .search-input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .search-type-selector select {
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-color);
+        }
+
+        .btn-search {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+        }
+
+        .btn-search:hover {
+            background: var(--secondary-color);
+        }
+
+        .quick-links {
+            margin-top: var(--spacing-lg);
+        }
+
+        .quick-links h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .chemical-quick-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .quick-link-btn {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .quick-link-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .msds-results-section {
+            min-height: 400px;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .results-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-export-results, .btn-clear-results {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-export-results:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .btn-clear-results:hover {
+            background: var(--danger-color);
+            color: white;
+            border-color: var(--danger-color);
+        }
+
+        .search-results {
+            background: var(--bg-color);
+        }
+
+        .no-results-placeholder {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .no-results-placeholder i {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .chemical-result-card {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .chemical-result-card:hover {
+            box-shadow: var(--shadow-lg);
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: var(--spacing-lg);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .chemical-names h4 {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-color);
+        }
+
+        .english-name {
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .match-type {
+            background: var(--accent-color);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+        }
+
+        .result-actions {
+            display: flex;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-favorite, .btn-share, .btn-detail {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: var(--border-color);
+            color: var(--text-secondary);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-favorite:hover {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .btn-share:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-detail:hover {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .result-basic-info {
+            padding: var(--spacing-lg);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-item .label {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .info-item .value {
+            color: var(--text-color);
+        }
+
+        .info-item .value.local {
+            color: var(--accent-color);
+        }
+
+        .info-item .value.online {
+            color: var(--primary-color);
+        }
+
+        .result-hazards {
+            padding: 0 var(--spacing-lg) var(--spacing-lg);
+        }
+
+        .result-hazards h5 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .hazard-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .hazard-tag {
+            padding: 4px 8px;
+            border-radius: var(--border-radius-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .hazard-tag.serious {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .hazard-tag.warning {
+            background: var(--warning-color);
+            color: white;
+        }
+
+        .hazard-tag.caution {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .result-footer {
+            padding: var(--spacing-lg);
+            background: var(--bg-tertiary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-links {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .external-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: 0.9rem;
+        }
+
+        .external-link:hover {
+            text-decoration: underline;
+        }
+
+        .result-tools {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-use-in-assessment, .btn-add-to-monitoring {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.85rem;
+        }
+
+        .btn-use-in-assessment:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-add-to-monitoring:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .msds-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-lg);
+        }
+
+        .sidebar-section {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+        }
+
+        .sidebar-section h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .search-history, .favorites {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .history-query {
+            flex: 1;
+            background: none;
+            border: none;
+            text-align: left;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+        }
+
+        .history-query:hover {
+            background: var(--bg-secondary);
+        }
+
+        .history-time {
+            font-size: 0.75rem;
+            color: var(--text-light);
+        }
+
+        .btn-remove-history {
+            width: 20px;
+            height: 20px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-remove-history:hover {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .database-stats {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-xs) 0;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .stat-value {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .search-loading {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--border-color);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto var(--spacing-md) auto;
+        }
+
+        .search-error {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--danger-color);
+        }
+
+        .search-error i {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .module-error {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            margin: var(--spacing-lg);
+        }
+
+        .module-error i {
+            font-size: 3rem;
+            color: var(--danger-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .msds-database-container {
+                grid-template-columns: 1fr;
+            }
+
+            .msds-sidebar {
+                flex-direction: row;
+                gap: var(--spacing-md);
+            }
+
+            .sidebar-section {
+                flex: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .msds-database-container {
+                padding: var(--spacing-md);
+            }
+
+            .search-tabs {
+                flex-direction: column;
+            }
+
+            .search-tab {
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .search-input-group {
+                flex-direction: column;
+            }
+
+            .chemical-quick-links {
+                justify-content: center;
+            }
+
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .result-footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-md);
+            }
+
+            .msds-sidebar {
+                flex-direction: column;
+            }
+        }
+
+        /* 气体换算工具模块样式 */
+        .gas-calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .gas-calc-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            color: white;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .gas-calc-header h2 {
+            margin-bottom: var(--spacing-sm);
+            font-size: 2rem;
+        }
+
+        .calc-tabs {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .calc-tab {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .calc-tab:hover {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .calc-tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .calc-tab-content {
+            display: none;
+            padding: var(--spacing-lg);
+        }
+
+        .calc-tab-content.active {
+            display: block;
+        }
+
+        .gas-selection {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .gas-selection h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .gas-input-row {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .gas-input-row select {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-color);
+        }
+
+        .custom-gas-input {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .custom-gas-input input {
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            width: 120px;
+        }
+
+        .gas-info {
+            margin-top: var(--spacing-sm);
+        }
+
+        .gas-details {
+            display: flex;
+            gap: var(--spacing-lg);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .environmental-conditions {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .environmental-conditions h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .condition-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .input-group label {
+            min-width: 60px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .input-group input {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-color);
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-group .unit {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .conversion-calculator {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .conversion-calculator h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .conversion-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .conversion-input {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+        }
+
+        .conversion-input label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .conversion-input input {
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .conversion-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+
+        .additional-units {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .unit-conversion {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .unit-conversion label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .unit-conversion input {
+            padding: var(--spacing-sm);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-secondary);
+            text-align: center;
+        }
+
+        .conversion-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+
+        .btn-calculate, .btn-clear {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn-calculate {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-calculate:hover {
+            background: var(--secondary-color);
+        }
+
+        .btn-clear {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-clear:hover {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .conversion-formula {
+            background: var(--bg-tertiary);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .conversion-formula h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+        }
+
+        .formula-display p {
+            margin-bottom: var(--spacing-sm);
+            font-family: 'Courier New', monospace;
+        }
+
+        .formula-note {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .calculation-history {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .calculation-history h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .history-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .history-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .history-type {
+            font-weight: 500;
+            color: var(--primary-color);
+        }
+
+        .history-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .history-summary {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .history-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .btn-reuse {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-reuse:hover {
+            background: var(--primary-color);
+        }
+
+        .history-actions .btn-export-history,
+        .history-actions .btn-clear-history {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: var(--transition);
+        }
+
+        .btn-export-history:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .btn-clear-history:hover {
+            background: var(--danger-color);
+            color: white;
+            border-color: var(--danger-color);
+        }
+
+        .empty-history {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: var(--spacing-lg);
+        }
+
+        /* 体积计算特定样式 */
+        .calc-type-selector {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .calc-type-options {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .calc-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .calc-option:hover {
+            background: var(--bg-secondary);
+        }
+
+        .calc-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .input-group select {
+            padding: var(--spacing-sm);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-color);
+            min-width: 80px;
+        }
+
+        /* 混合气体样式 */
+        .mixture-components {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            min-height: 100px;
+            background: var(--bg-secondary);
+        }
+
+        .btn-add-component {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px dashed var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+        }
+
+        .btn-add-component:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .gas-calculator-container {
+                padding: var(--spacing-md);
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+            }
+
+            .calc-tab {
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .conversion-grid {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .conversion-arrow {
+                transform: rotate(90deg);
+            }
+
+            .condition-inputs {
+                grid-template-columns: 1fr;
+            }
+
+            .additional-units {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-type-options {
+                flex-direction: column;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 防火间距计算模块样式 */
+        .fire-distance-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--spacing-lg);
+        }
+
+        .fire-distance-header {
+            text-align: center;
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, #e74c3c, var(--primary-color));
+            color: white;
+            border-radius: var(--border-radius-lg);
+        }
+
+        .fire-distance-header h2 {
+            margin-bottom: var(--spacing-sm);
+            font-size: 2rem;
+        }
+
+        .fire-calc-tabs {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .fire-tab-buttons {
+            display: flex;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .fire-tab {
+            flex: 1;
+            padding: var(--spacing-md);
+            border: none;
+            background: transparent;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+        }
+
+        .fire-tab:hover {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .fire-tab.active {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .fire-tab-content {
+            display: none;
+            padding: var(--spacing-lg);
+        }
+
+        .fire-tab-content.active {
+            display: block;
+        }
+
+        .building-selection {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--spacing-xl);
+            align-items: flex-start;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .building-group {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+        }
+
+        .building-group h4 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            text-align: center;
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .building-config {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .input-row {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .input-row label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .input-row input,
+        .input-row select {
+            padding: var(--spacing-md);
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background: var(--bg-color);
+        }
+
+        .input-row input:focus,
+        .input-row select:focus {
+            outline: none;
+            border-color: #e74c3c;
+            box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+        }
+
+        .special-factors {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-xs);
+        }
+
+        .factor-option {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            cursor: pointer;
+            padding: var(--spacing-xs);
+            border-radius: var(--border-radius-sm);
+            transition: var(--transition);
+        }
+
+        .factor-option:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .factor-option input[type="checkbox"] {
+            margin: 0;
+        }
+
+        .distance-arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #e74c3c;
+            font-size: 1.2rem;
+            gap: var(--spacing-sm);
+        }
+
+        .distance-arrow i {
+            font-size: 2rem;
+        }
+
+        .calculation-actions {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .btn-calculate-distance,
+        .btn-clear-inputs {
+            padding: var(--spacing-md) var(--spacing-lg);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .btn-calculate-distance {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-calculate-distance:hover {
+            background: #c0392b;
+        }
+
+        .btn-clear-inputs {
+            background: var(--border-color);
+            color: var(--text-color);
+        }
+
+        .btn-clear-inputs:hover {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .distance-results {
+            min-height: 200px;
+        }
+
+        .distance-error {
+            text-align: center;
+            padding: var(--spacing-xl);
+            color: var(--danger-color);
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--danger-color);
+        }
+
+        .distance-error i {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .distance-result-content {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+
+        .result-header {
+            background: var(--bg-secondary);
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-header h4 {
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .result-time {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .building-pair {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: var(--spacing-lg);
+            align-items: center;
+            padding: var(--spacing-xl);
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+        }
+
+        .building-summary {
+            text-align: center;
+        }
+
+        .building-summary h5 {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-color);
+        }
+
+        .building-summary p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .distance-value {
+            text-align: center;
+            padding: var(--spacing-lg);
+            background: #e74c3c;
+            color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .distance-number {
+            display: block;
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .distance-unit {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .calculation-details {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-sm) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .detail-value {
+            color: var(--text-color);
+        }
+
+        .result-recommendation {
+            padding: var(--spacing-lg);
+            background: var(--bg-tertiary);
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .result-recommendation h5 {
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .result-recommendation p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .result-actions {
+            padding: var(--spacing-lg);
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+        }
+
+        .btn-save-result,
+        .btn-generate-report,
+        .btn-new-calculation {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-save-result:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .btn-generate-report:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        .btn-new-calculation:hover {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .fire-distance-history {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            margin-top: var(--spacing-lg);
+        }
+
+        .fire-distance-history h3 {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .history-controls {
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .btn-clear-history,
+        .btn-export-history {
+            padding: var(--spacing-sm) var(--spacing-md);
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .btn-clear-history:hover {
+            background: var(--danger-color);
+            color: white;
+            border-color: var(--danger-color);
+        }
+
+        .btn-export-history:hover {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .fire-history-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .fire-history-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .history-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .buildings-pair {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .buildings-pair i {
+            color: #e74c3c;
+        }
+
+        .history-distance {
+            font-weight: bold;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        .history-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .history-time {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .btn-reuse-calc {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .btn-reuse-calc:hover {
+            background: #c0392b;
+        }
+
+        .empty-history {
+            text-align: center;
+            color: var(--text-secondary);
+            font-style: italic;
+            padding: var(--spacing-lg);
+        }
+
+        /* 批量计算样式 */
+        .building-list {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            min-height: 100px;
+            background: var(--bg-secondary);
+        }
+
+        .btn-add-building {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 2px dashed var(--border-color);
+            background: transparent;
+            color: var(--text-secondary);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            transition: var(--transition);
+        }
+
+        .btn-add-building:hover {
+            border-color: #e74c3c;
+            color: #e74c3c;
+            background: var(--bg-secondary);
+        }
+
+        /* 规范查询表格样式 */
+        .reference-table-container {
+            overflow-x: auto;
+            margin-top: var(--spacing-md);
+        }
+
+        .reference-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-color);
+        }
+
+        .reference-table th,
+        .reference-table td {
+            padding: var(--spacing-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .reference-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .reference-table td {
+            color: var(--text-secondary);
+        }
+
+        .reference-table tbody tr:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1200px) {
+            .building-selection {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-lg);
+            }
+
+            .distance-arrow {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            .distance-arrow i {
+                transform: rotate(90deg);
+            }
+
+            .building-pair {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .fire-distance-container {
+                padding: var(--spacing-md);
+            }
+
+            .fire-tab-buttons {
+                flex-direction: column;
+            }
+
+            .fire-tab {
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .special-factors {
+                grid-template-columns: 1fr;
+            }
+
+            .calculation-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .result-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .history-controls {
+                flex-direction: column;
+            }
+
+            .reference-table {
+                font-size: 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -838,16 +3370,24 @@
                     <!-- 欢迎区域 -->
                     <section class="welcome-section">
                         <div class="welcome-content">
-                            <h2>欢迎使用 ChemSafe Pro</h2>
-                            <p class="subtitle">专业的化工安全数据查询与评估平台</p>
+                            <h1>ChemSafe Pro - 专业化工安全工具平台</h1>
+                            <p class="subtitle">基于国家标准的安全评估与计算工具</p>
                             <div class="feature-highlights">
                                 <div class="highlight-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <span>GB18218-2018标准</span>
+                                </div>
+                                <div class="highlight-item">
                                     <i class="fas fa-shield-alt"></i>
-                                    <span>权威标准</span>
+                                    <span>GBZ 2.1-2019标准</span>
                                 </div>
                                 <div class="highlight-item">
                                     <i class="fas fa-calculator"></i>
-                                    <span>智能计算</span>
+                                    <span>财资〔2022〕136号</span>
+                                </div>
+                                <div class="highlight-item">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>专业可靠</span>
                                 </div>
                                 <div class="highlight-item">
                                     <i class="fas fa-file-alt"></i>
@@ -863,7 +3403,7 @@
 
                     <!-- 功能卡片区域 -->
                     <section class="features-section">
-                        <h3>核心功能模块</h3>
+                        <h2>核心功能模块</h2>
                         <div class="feature-cards">
                             <!-- 重大危险源评估 -->
                             <div class="feature-card major-hazard" onclick="loadModule('majorHazard')">
@@ -965,6 +3505,26 @@
                                 </div>
                             </div>
 
+                            <!-- 安全生产费用提取 -->
+                            <div class="feature-card safety-fee" onclick="loadModule('safetyFee')">
+                                <div class="card-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <div class="card-content">
+                                    <h4>安全生产费用提取</h4>
+                                    <p>基于财资〔2022〕136号文件的费用提取标准计算</p>
+                                    <div class="card-features">
+                                        <span class="feature-tag">分段计算</span>
+                                        <span class="feature-tag">标准查询</span>
+                                        <span class="feature-tag">快速计算</span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <span>立即使用</span>
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </div>
+
                             <!-- 风险评估工具 -->
                             <div class="feature-card risk-assessment" onclick="loadModule('riskAssessment')">
                                 <div class="card-icon">
@@ -989,7 +3549,7 @@
 
                     <!-- 快速操作区域 -->
                     <section class="quick-actions">
-                        <h3>快速操作</h3>
+                        <h4>快速操作</h4>
                         <div class="quick-action-buttons">
                             <button class="quick-btn" onclick="quickMSDSSearch()">
                                 <i class="fas fa-search"></i>
@@ -1007,6 +3567,41 @@
                                 <i class="fas fa-exclamation"></i>
                                 <span>危险源快检</span>
                             </button>
+                        </div>
+                    </section>
+
+                    <!-- SEO内容区域 -->
+                    <section class="seo-content-section">
+                        <div class="seo-content">
+                            <h2>专业化工安全管理解决方案</h2>
+                            <p><strong>ChemSafe Pro</strong>是基于<strong>GB18218-2018</strong>《危险化学品重大危险源辨识》和<strong>GBZ2.1-2019</strong>《工作场所有害因素职业接触限值》国家标准开发的专业化工安全工具平台。为危险化学品企业提供全面的安全评估、风险管控和合规计算解决方案。</p>
+
+                            <div class="seo-features">
+                                <div class="seo-feature-item">
+                                    <h3>重大危险源评估 - GB18218-2018标准</h3>
+                                    <p>严格按照国家标准GB18218-2018要求，提供85种危险化学品的<strong>S值计算</strong>（辨识指标）和<strong>R值计算</strong>（分级指标）。支持自动判定危险源等级，生成专业评估报告，确保企业安全生产合规性。</p>
+                                </div>
+
+                                <div class="seo-feature-item">
+                                    <h3>安全生产费用计算 - 财资〔2022〕136号</h3>
+                                    <p>基于财政部<strong>财资〔2022〕136号</strong>文件标准，实现分阶段累进费用计算。支持危险化学品生产、储存、经营企业的费用提取标准，提供年度和月度提取金额的精确计算。</p>
+                                </div>
+
+                                <div class="seo-feature-item">
+                                    <h3>职业接触限值查询 - GBZ2.1-2019标准</h3>
+                                    <p>依据<strong>GBZ2.1-2019</strong>职业健康标准，提供化学品职业接触限值查询、单位换算(ppm ↔ mg/m³)和暴露风险评估。帮助企业建立完善的职业健康防护体系。</p>
+                                </div>
+
+                                <div class="seo-feature-item">
+                                    <h3>MSDS化学品数据库</h3>
+                                    <p>集成化学品安全数据表查询功能，支持中英文名称、CAS号智能搜索。提供GHS分类信息、危险特性、储存要求等关键安全数据，为企业化学品管理提供权威参考。</p>
+                                </div>
+                            </div>
+
+                            <div class="seo-keywords">
+                                <h3>适用行业与应用场景</h3>
+                                <p>适用于<strong>危险化学品生产企业</strong>、<strong>化工储存企业</strong>、<strong>危险化学品经营企业</strong>、石油化工、精细化工、医药化工等行业的安全管理部门、HSE部门、技术部门使用。支持重大危险源辨识评估、安全生产费用预算、职业健康风险评估、化学品安全管理等专业应用场景。</p>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -1050,7 +3645,7 @@
                     <h2>使用帮助</h2>
                     <div class="help-sections">
                         <div class="help-section">
-                            <h3>快速入门</h3>
+                            <h4>快速入门</h4>
                             <div class="help-content">
                                 <ol>
                                     <li>选择需要使用的功能模块</li>
@@ -1145,7 +3740,7 @@
                             <div class="assessment-container">
                                 <!-- 化学品选择区域 -->
                                 <div class="assessment-section">
-                                    <h3><i class="fas fa-flask"></i> 化学品信息</h3>
+                                    <h4><i class="fas fa-flask"></i> 化学品信息</h4>
                                     <div class="search-controls">
                                         <input type="text" id="chemical-search" placeholder="输入化学品名称、CAS号或别名搜索..."
                                                oninput="searchChemicals(this.value)">
@@ -1156,7 +3751,7 @@
 
                                 <!-- 存储量输入区域 -->
                                 <div class="assessment-section">
-                                    <h3><i class="fas fa-warehouse"></i> 实际存储量</h3>
+                                    <h4><i class="fas fa-warehouse"></i> 实际存储量</h4>
                                     <div class="input-group">
                                         <input type="number" id="actual-quantity" placeholder="请输入实际存储量"
                                                step="0.01" oninput="calculateHazardLevel()">
@@ -1166,7 +3761,7 @@
 
                                 <!-- 计算结果区域 -->
                                 <div class="assessment-section">
-                                    <h3><i class="fas fa-calculator"></i> 评估结果</h3>
+                                    <h4><i class="fas fa-calculator"></i> 评估结果</h4>
                                     <div id="calculation-results" class="calculation-results">
                                         <p class="info-text">请选择化学品并输入存储量</p>
                                     </div>
@@ -1213,6 +3808,203 @@
                                 </div>
                             </div>
                         </div>
+                    `;
+                    break;
+                case 'safetyFee':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div class="module-content">
+                            <div class="module-header">
+                                <i class="fas fa-calculator"></i>
+                                <h2>安全生产费用提取计算</h2>
+                                <p>基于财资〔2022〕136号文件标准</p>
+                            </div>
+
+                            <div class="safety-fee-container">
+                                <!-- 企业类型选择 -->
+                                <div class="fee-section">
+                                    <h4><i class="fas fa-building"></i> 企业类型</h4>
+                                    <div class="company-type-options">
+                                        <label class="type-option">
+                                            <input type="radio" name="companyType" value="production" checked>
+                                            <span class="option-text">危险化学品生产企业</span>
+                                        </label>
+                                        <label class="type-option">
+                                            <input type="radio" name="companyType" value="storage">
+                                            <span class="option-text">危险化学品储存企业</span>
+                                        </label>
+                                        <label class="type-option">
+                                            <input type="radio" name="companyType" value="trading">
+                                            <span class="option-text">危险化学品经营企业</span>
+                                        </label>
+                                        <label class="type-option">
+                                            <input type="radio" name="companyType" value="other">
+                                            <span class="option-text">其他危险化学品企业</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- 营业收入输入 -->
+                                <div class="fee-section">
+                                    <h4><i class="fas fa-money-bill-wave"></i> 营业收入</h4>
+                                    <div class="revenue-input-group">
+                                        <input type="number" id="annual-revenue" placeholder="请输入上年度营业收入"
+                                               step="0.01" min="0" oninput="calculateSafetyFee()">
+                                        <span class="input-unit">万元</span>
+                                    </div>
+                                    <div class="fee-standards">
+                                        <h4>📋 提取标准说明</h4>
+                                        <div class="standards-grid">
+                                            <div class="standard-item">
+                                                <span class="standard-range">≤ 1,000万元</span>
+                                                <span class="standard-rate">4%</span>
+                                            </div>
+                                            <div class="standard-item">
+                                                <span class="standard-range">1,000-1万万元</span>
+                                                <span class="standard-rate">2%</span>
+                                            </div>
+                                            <div class="standard-item">
+                                                <span class="standard-range">1万-10万万元</span>
+                                                <span class="standard-rate">0.5%</span>
+                                            </div>
+                                            <div class="standard-item">
+                                                <span class="standard-range">> 10万万元</span>
+                                                <span class="standard-rate">0.2%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 计算结果 -->
+                                <div class="fee-section">
+                                    <h4><i class="fas fa-chart-line"></i> 计算结果</h4>
+                                    <div id="fee-calculation-results" class="fee-results">
+                                        <p class="info-text">请输入营业收入进行计算</p>
+                                    </div>
+                                </div>
+
+                                <!-- 操作按钮 -->
+                                <div class="fee-actions">
+                                    <button class="btn btn-primary" onclick="performFeeCalculation()">
+                                        <i class="fas fa-calculator"></i> 重新计算
+                                    </button>
+                                    <button class="btn btn-secondary" onclick="clearFeeData()">
+                                        <i class="fas fa-refresh"></i> 清空数据
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                case 'msdsDatabase':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div id="msdsModuleContainer"></div>
+                        <script>
+                            (async function() {
+                                try {
+                                    const { MSDSDatabaseModule } = await import('./src/modules/msds-database.js');
+                                    const msdsModule = new MSDSDatabaseModule();
+                                    const container = document.getElementById('msdsModuleContainer');
+                                    if (container) {
+                                        const moduleInterface = msdsModule.initializeMSDSInterface();
+                                        container.appendChild(moduleInterface);
+
+                                        // 加载搜索历史和收藏夹
+                                        msdsModule.loadSearchHistory();
+                                        msdsModule.updateSearchHistoryDisplay();
+
+                                        console.log('MSDS数据库模块已加载');
+                                    }
+                                } catch (error) {
+                                    console.error('加载MSDS模块失败:', error);
+                                    document.getElementById('msdsModuleContainer').innerHTML = \`
+                                        <div class="module-error">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <h3>模块加载失败</h3>
+                                            <p>MSDS数据库模块加载失败，请刷新页面重试</p>
+                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
+                                        </div>
+                                    \`;
+                                }
+                            })();
+                        </script>
+                    `;
+                    break;
+                case 'gasCalculator':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div id="gasCalcModuleContainer"></div>
+                        <script>
+                            (async function() {
+                                try {
+                                    const { GasCalculatorModule } = await import('./src/modules/gas-calculator.js');
+                                    const gasCalcModule = new GasCalculatorModule();
+                                    const container = document.getElementById('gasCalcModuleContainer');
+                                    if (container) {
+                                        const moduleInterface = gasCalcModule.initializeGasCalculatorInterface();
+                                        container.appendChild(moduleInterface);
+
+                                        // 初始化历史记录
+                                        gasCalcModule.updateHistoryDisplay();
+
+                                        console.log('气体换算工具模块已加载');
+                                    }
+                                } catch (error) {
+                                    console.error('加载气体换算模块失败:', error);
+                                    document.getElementById('gasCalcModuleContainer').innerHTML = \`
+                                        <div class="module-error">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <h3>模块加载失败</h3>
+                                            <p>气体换算工具模块加载失败，请刷新页面重试</p>
+                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
+                                        </div>
+                                    \`;
+                                }
+                            })();
+                        </script>
+                    `;
+                    break;
+                case 'fireDistance':
+                    moduleContent = `
+                        <div class="module-back-btn" onclick="backToHome()">
+                            <i class="fas fa-arrow-left"></i> 返回首页
+                        </div>
+                        <div id="fireDistanceModuleContainer"></div>
+                        <script>
+                            (async function() {
+                                try {
+                                    const { FireDistanceModule } = await import('./src/modules/fire-distance.js');
+                                    const fireDistanceModule = new FireDistanceModule();
+                                    const container = document.getElementById('fireDistanceModuleContainer');
+                                    if (container) {
+                                        const moduleInterface = fireDistanceModule.initializeFireDistanceInterface();
+                                        container.appendChild(moduleInterface);
+
+                                        // 初始化历史记录
+                                        fireDistanceModule.updateHistoryDisplay();
+
+                                        console.log('防火间距计算模块已加载');
+                                    }
+                                } catch (error) {
+                                    console.error('加载防火间距模块失败:', error);
+                                    document.getElementById('fireDistanceModuleContainer').innerHTML = \`
+                                        <div class="module-error">
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                            <h3>模块加载失败</h3>
+                                            <p>防火间距计算模块加载失败，请刷新页面重试</p>
+                                            <button class="btn btn-primary" onclick="location.reload()">刷新页面</button>
+                                        </div>
+                                    \`;
+                                }
+                            })();
+                        </script>
                     `;
                     break;
                 default:
@@ -1502,6 +4294,219 @@
                 if (searchResults) {
                     searchResults.style.display = 'none';
                 }
+            }
+        });
+
+        // 安全生产费用提取计算功能
+        function calculateSafetyFee() {
+            const revenueInput = document.getElementById('annual-revenue');
+            const resultsContainer = document.getElementById('fee-calculation-results');
+
+            if (!revenueInput || !resultsContainer) return;
+
+            const revenue = parseFloat(revenueInput.value);
+
+            if (!revenue || revenue <= 0) {
+                resultsContainer.innerHTML = '<p class="info-text">请输入有效的营业收入金额</p>';
+                return;
+            }
+
+            // 获取企业类型
+            const companyType = document.querySelector('input[name="companyType"]:checked')?.value || 'production';
+
+            // 计算提取费用
+            const result = calculateFeeByRevenue(revenue, companyType);
+
+            // 显示计算结果
+            displayFeeResults(result);
+        }
+
+        function calculateFeeByRevenue(revenue, companyType) {
+            // 分阶段累进计算 (基于财资〔2022〕136号)
+            const brackets = [
+                { min: 0, max: 1000, rate: 0.04 },      // ≤1,000万元: 4%
+                { min: 1000, max: 10000, rate: 0.02 },  // 1,000-1万万元: 2%
+                { min: 10000, max: 100000, rate: 0.005 }, // 1万-10万万元: 0.5%
+                { min: 100000, max: Infinity, rate: 0.002 } // >10万万元: 0.2%
+            ];
+
+            let totalFee = 0;
+            let calculationDetails = [];
+
+            // 逐级计算每个阶段的费用
+            for (const bracket of brackets) {
+                if (revenue > bracket.min) {
+                    // 计算当前阶段的应税收入
+                    const bracketRevenue = Math.min(revenue, bracket.max) - bracket.min;
+
+                    if (bracketRevenue > 0) {
+                        const bracketFee = bracketRevenue * bracket.rate;
+                        totalFee += bracketFee;
+
+                        // 记录计算详情
+                        calculationDetails.push({
+                            range: formatRange(bracket.min, bracket.max),
+                            revenue: bracketRevenue,
+                            rate: bracket.rate * 100,
+                            fee: bracketFee
+                        });
+                    }
+                }
+            }
+
+            // 企业类型系数
+            const typeMultiplier = getCompanyTypeMultiplier(companyType);
+            const finalAmount = totalFee * typeMultiplier;
+
+            return {
+                revenue: revenue,
+                companyType: companyType,
+                annualAmount: finalAmount,
+                monthlyAmount: finalAmount / 12,
+                typeMultiplier: typeMultiplier,
+                calculationDetails: calculationDetails,
+                totalFeeBeforeMultiplier: totalFee
+            };
+        }
+
+        function formatRange(min, max) {
+            if (max === Infinity) {
+                if (min >= 10000) {
+                    return `> ${(min/10000).toFixed(0)}万万元`;
+                } else {
+                    return `> ${min.toLocaleString()}万元`;
+                }
+            }
+
+            let minStr, maxStr;
+
+            if (min >= 10000) {
+                minStr = `${(min/10000).toFixed(0)}万万`;
+            } else {
+                minStr = min.toLocaleString();
+            }
+
+            if (max >= 10000) {
+                maxStr = `${(max/10000).toFixed(0)}万万`;
+            } else {
+                maxStr = max.toLocaleString();
+            }
+
+            if (min === 0) {
+                return `≤ ${maxStr}万元`;
+            }
+
+            return `${minStr}-${maxStr}万元`;
+        }
+
+        function getCompanyTypeMultiplier(companyType) {
+            // 目前各类型企业使用相同标准，返回1
+            // 如果有特殊规定可在此调整
+            const multipliers = {
+                production: 1.0,  // 生产企业
+                storage: 1.0,     // 储存企业
+                trading: 1.0,     // 经营企业
+                other: 1.0        // 其他企业
+            };
+
+            return multipliers[companyType] || 1.0;
+        }
+
+        function getCompanyTypeName(companyType) {
+            const names = {
+                production: '危险化学品生产企业',
+                storage: '危险化学品储存企业',
+                trading: '危险化学品经营企业',
+                other: '其他危险化学品企业'
+            };
+
+            return names[companyType] || '未知类型';
+        }
+
+        function displayFeeResults(result) {
+            const resultsContainer = document.getElementById('fee-calculation-results');
+
+            const formattedRevenue = result.revenue.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+            const formattedAnnual = result.annualAmount.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+            const formattedMonthly = result.monthlyAmount.toLocaleString('zh-CN', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+
+            // 生成分阶段计算详情
+            let calculationDetailsHtml = '';
+            if (result.calculationDetails && result.calculationDetails.length > 0) {
+                calculationDetailsHtml = `
+                    <div class="fee-result-item">
+                        <div class="calculation-breakdown">
+                            <h4 style="margin-bottom: 10px; color: var(--primary-color);">📊 分阶段计算详情：</h4>
+                            ${result.calculationDetails.map(detail => `
+                                <div class="breakdown-item">
+                                    <span class="breakdown-range">${detail.range}</span>
+                                    <span class="breakdown-calculation">
+                                        ${detail.revenue.toLocaleString('zh-CN', {maximumFractionDigits: 2})}万元 × ${detail.rate}% =
+                                        <strong>${detail.fee.toLocaleString('zh-CN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}万元</strong>
+                                    </span>
+                                </div>
+                            `).join('')}
+                            <div class="breakdown-total">
+                                <strong>小计: ${result.totalFeeBeforeMultiplier.toLocaleString('zh-CN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}万元</strong>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            resultsContainer.innerHTML = `
+                <div class="fee-result-item">
+                    <span class="fee-result-label">企业类型:</span>
+                    <span class="fee-result-value">${getCompanyTypeName(result.companyType)}</span>
+                </div>
+                <div class="fee-result-item">
+                    <span class="fee-result-label">营业收入:</span>
+                    <span class="fee-result-value">${formattedRevenue} 万元</span>
+                </div>
+                ${calculationDetailsHtml}
+                <div class="fee-result-item fee-highlight">
+                    <span class="fee-result-label">年度应提取:</span>
+                    <span class="fee-result-value">${formattedAnnual} 万元</span>
+                </div>
+                <div class="fee-result-item">
+                    <span class="fee-result-label">月均提取:</span>
+                    <span class="fee-result-value">${formattedMonthly} 万元</span>
+                </div>
+            `;
+        }
+
+        function performFeeCalculation() {
+            calculateSafetyFee();
+            updateStatus('安全生产费用计算完成');
+        }
+
+        function clearFeeData() {
+            const revenueInput = document.getElementById('annual-revenue');
+            const resultsContainer = document.getElementById('fee-calculation-results');
+            const defaultType = document.querySelector('input[name="companyType"][value="production"]');
+
+            if (revenueInput) revenueInput.value = '';
+            if (resultsContainer) resultsContainer.innerHTML = '<p class="info-text">请输入营业收入进行计算</p>';
+            if (defaultType) defaultType.checked = true;
+
+            updateStatus('数据已清空');
+        }
+
+        // 监听企业类型变化
+        document.addEventListener('change', function(e) {
+            if (e.target.name === 'companyType') {
+                calculateSafetyFee(); // 企业类型变化时重新计算
             }
         });
 
