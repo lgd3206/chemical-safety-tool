@@ -896,6 +896,10 @@
         .feature-card:nth-child(5) { animation-delay: 0.5s; }
         .feature-card:nth-child(6) { animation-delay: 0.6s; }
         .feature-card:nth-child(7) { animation-delay: 0.7s; }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .main-content {
                 padding: 16px;
             }
 
@@ -3752,110 +3756,107 @@
                     `;
                     break;
                 case 'msdsDatabase':
-                    moduleContent = `
-                        <div class="module-back-btn" onclick="backToHome()">
-                            <i class="fas fa-arrow-left"></i> 返回首页
-                        </div>
-                        <div id="msdsModuleContainer"></div>
-                        <script>
-                            (async function() {
-                                try {
-                                    const { MSDSDatabaseModule } = await import('./src/modules/msds-database.js');
-                                    const msdsModule = new MSDSDatabaseModule();
-                                    const container = document.getElementById('msdsModuleContainer');
-                                    if (container) {
-                                        const moduleInterface = msdsModule.initializeMSDSInterface();
-                                        container.appendChild(moduleInterface);
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div id="msdsModuleContainer"></div>';
 
-                                        // 加载搜索历史和收藏夹
-                                        msdsModule.loadSearchHistory();
-                                        msdsModule.updateSearchHistoryDisplay();
-
-                                        console.log('MSDS数据库模块已加载');
-                                    }
-                                } catch (error) {
-                                    console.error('加载MSDS模块失败:', error);
-                                    document.getElementById('msdsModuleContainer').innerHTML =
-                                        '<div class="module-error">' +
-                                            '<i class="fas fa-exclamation-triangle"></i>' +
-                                            '<h3>模块加载失败</h3>' +
-                                            '<p>MSDS数据库模块加载失败，请刷新页面重试</p>' +
-                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
-                                        '</div>';
-                                }
-                            })();
-                        </script>
-                    `;
+                    // 延迟执行模块初始化
+                    setTimeout(async function() {
+                        try {
+                            const { MSDSDatabaseModule } = await import('./src/modules/msds-database.js');
+                            const msdsModule = new MSDSDatabaseModule();
+                            const container = document.getElementById('msdsModuleContainer');
+                            if (container) {
+                                const moduleInterface = msdsModule.initializeMSDSInterface();
+                                container.appendChild(moduleInterface);
+                                msdsModule.loadSearchHistory();
+                                msdsModule.updateSearchHistoryDisplay();
+                                console.log('MSDS数据库模块已加载');
+                            }
+                        } catch (error) {
+                            console.error('加载MSDS模块失败:', error);
+                            const container = document.getElementById('msdsModuleContainer');
+                            if (container) {
+                                container.innerHTML =
+                                    '<div class="module-error">' +
+                                        '<i class="fas fa-exclamation-triangle"></i>' +
+                                        '<h3>模块加载失败</h3>' +
+                                        '<p>MSDS数据库模块加载失败，请刷新页面重试</p>' +
+                                        '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                    '</div>';
+                            }
+                        }
+                    }, 100);
                     break;
                 case 'gasCalculator':
-                    moduleContent = `
-                        <div class="module-back-btn" onclick="backToHome()">
-                            <i class="fas fa-arrow-left"></i> 返回首页
-                        </div>
-                        <div id="gasCalcModuleContainer"></div>
-                        <script>
-                            (async function() {
-                                try {
-                                    const { GasCalculatorModule } = await import('./src/modules/gas-calculator.js');
-                                    const gasCalcModule = new GasCalculatorModule();
-                                    const container = document.getElementById('gasCalcModuleContainer');
-                                    if (container) {
-                                        const moduleInterface = gasCalcModule.initializeGasCalculatorInterface();
-                                        container.appendChild(moduleInterface);
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div id="gasCalcModuleContainer"></div>';
 
-                                        // 初始化历史记录
-                                        gasCalcModule.updateHistoryDisplay();
-
-                                        console.log('气体换算工具模块已加载');
-                                    }
-                                } catch (error) {
-                                    console.error('加载气体换算模块失败:', error);
-                                    document.getElementById('gasCalcModuleContainer').innerHTML =
-                                        '<div class="module-error">' +
-                                            '<i class="fas fa-exclamation-triangle"></i>' +
-                                            '<h3>模块加载失败</h3>' +
-                                            '<p>气体换算工具模块加载失败，请刷新页面重试</p>' +
-                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
-                                        '</div>';
-                                }
-                            })();
-                        </script>
-                    `;
+                    // 延迟执行模块初始化
+                    setTimeout(async function() {
+                        try {
+                            const { GasCalculatorModule } = await import('./src/modules/gas-calculator.js');
+                            const gasCalcModule = new GasCalculatorModule();
+                            const container = document.getElementById('gasCalcModuleContainer');
+                            if (container) {
+                                const moduleInterface = gasCalcModule.initializeGasCalculatorInterface();
+                                container.appendChild(moduleInterface);
+                                gasCalcModule.updateHistoryDisplay();
+                                console.log('气体换算工具模块已加载');
+                            }
+                        } catch (error) {
+                            console.error('加载气体换算模块失败:', error);
+                            const container = document.getElementById('gasCalcModuleContainer');
+                            if (container) {
+                                container.innerHTML =
+                                    '<div class="module-error">' +
+                                        '<i class="fas fa-exclamation-triangle"></i>' +
+                                        '<h3>模块加载失败</h3>' +
+                                        '<p>气体换算工具模块加载失败，请刷新页面重试</p>' +
+                                        '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                    '</div>';
+                            }
+                        }
+                    }, 100);
                     break;
                 case 'fireDistance':
-                    moduleContent = `
-                        <div class="module-back-btn" onclick="backToHome()">
-                            <i class="fas fa-arrow-left"></i> 返回首页
-                        </div>
-                        <div id="fireDistanceModuleContainer"></div>
-                        <script>
-                            (async function() {
-                                try {
-                                    const { FireDistanceModule } = await import('./src/modules/fire-distance.js');
-                                    const fireDistanceModule = new FireDistanceModule();
-                                    const container = document.getElementById('fireDistanceModuleContainer');
-                                    if (container) {
-                                        const moduleInterface = fireDistanceModule.initializeFireDistanceInterface();
-                                        container.appendChild(moduleInterface);
+                    moduleContent =
+                        '<div class="module-back-btn" onclick="backToHome()">' +
+                            '<i class="fas fa-arrow-left"></i> 返回首页' +
+                        '</div>' +
+                        '<div id="fireDistanceModuleContainer"></div>';
 
-                                        // 初始化历史记录
-                                        fireDistanceModule.updateHistoryDisplay();
-
-                                        console.log('防火间距计算模块已加载');
-                                    }
-                                } catch (error) {
-                                    console.error('加载防火间距模块失败:', error);
-                                    document.getElementById('fireDistanceModuleContainer').innerHTML =
-                                        '<div class="module-error">' +
-                                            '<i class="fas fa-exclamation-triangle"></i>' +
-                                            '<h3>模块加载失败</h3>' +
-                                            '<p>防火间距计算模块加载失败，请刷新页面重试</p>' +
-                                            '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
-                                        '</div>';
-                                }
-                            })();
-                        </script>
-                    `;
+                    // 延迟执行模块初始化
+                    setTimeout(async function() {
+                        try {
+                            const { FireDistanceModule } = await import('./src/modules/fire-distance.js');
+                            const fireDistanceModule = new FireDistanceModule();
+                            const container = document.getElementById('fireDistanceModuleContainer');
+                            if (container) {
+                                const moduleInterface = fireDistanceModule.initializeFireDistanceInterface();
+                                container.appendChild(moduleInterface);
+                                fireDistanceModule.updateHistoryDisplay();
+                                console.log('防火间距计算模块已加载');
+                            }
+                        } catch (error) {
+                            console.error('加载防火间距模块失败:', error);
+                            const container = document.getElementById('fireDistanceModuleContainer');
+                            if (container) {
+                                container.innerHTML =
+                                    '<div class="module-error">' +
+                                        '<i class="fas fa-exclamation-triangle"></i>' +
+                                        '<h3>模块加载失败</h3>' +
+                                        '<p>防火间距计算模块加载失败，请刷新页面重试</p>' +
+                                        '<button class="btn btn-primary" onclick="location.reload()">刷新页面</button>' +
+                                    '</div>';
+                            }
+                        }
+                    }, 100);
                     break;
                 default:
                     moduleContent = `
