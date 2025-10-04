@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职业接触限值查询 - 化学品安全工具</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .oel-search-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .search-header {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .search-header h1 {
+            margin: 0 0 15px 0;
+            font-size: 36px;
+        }
+
+        .search-header p {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input-group input:focus {
+            outline: none;
+            border-color: #10B981;
+        }
+
+        .search-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .search-tips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .tip-tag {
+            padding: 6px 12px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #666;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tip-tag:hover {
+            background: #e0e0e0;
+        }
+
+        .calculator-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .calculator-section h3 {
+            color: #10B981;
+            margin-bottom: 20px;
+        }
+
+        .calc-input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .calc-input-group input, .calc-input-group select {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+
+        .calc-result {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .calc-result.safe {
+            background: #d4edda;
+            border-left: 4px solid #10B981;
+        }
+
+        .calc-result.warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+        }
+
+        .calc-result.danger {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+
+        .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+        }
+
+        /* 结果控制栏 */
+        .results-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .results-info {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 5px;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            border: 1px solid #10B981;
+            background: white;
+            color: #10B981;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+
+        .view-btn.active {
+            background: #10B981;
+            color: white;
+        }
+
+        .view-btn:hover {
+            background: #10B981;
+            color: white;
+        }
+
+        /* 表格样式 */
+        .oel-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .oel-table th {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        .oel-table td {
+            border: 1px solid #dee2e6;
+            padding: 10px 8px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .oel-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .oel-table .text-left {
+            text-align: left;
+        }
+
+        .oel-table .chemical-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .oel-table .cas-number {
+            font-family: 'Courier New', monospace;
+            color: #666;
+        }
+
+        .oel-table .limit-value {
+            font-weight: 500;
+            color: #10B981;
+        }
+
+        .oel-table .no-value {
+            color: #999;
+            font-style: italic;
+        }
+
+        .badge-cell {
+            font-size: 12px;
+        }
+
+        .badge-cell .badge {
+            margin: 2px;
+            padding: 2px 6px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        /* 隐藏表格视图 */
+        .table-view {
+            display: none;
+        }
+
+        .table-view.active {
+            display: block;
+        }
+
+        /* 隐藏卡片视图 */
+        .card-view.hidden {
+            display: none;
+        }
+
+        .result-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .result-card:hover {
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.2);
+            border-color: #10B981;
+        }
+
+        .result-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .result-name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .result-badges {
+            display: flex;
+            gap: 8px;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .badge-carcinogen {
+            background: #fee;
+            color: #c33;
+        }
+
+        .badge-skin {
+            background: #fef3cd;
+            color: #856404;
+        }
+
+        .badge-sensitive {
+            background: #e7f3ff;
+            color: #0056b3;
+        }
+
+        .result-limits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .limit-box {
+            background: #f0fdf4;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .limit-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .limit-value {
+            font-size: 22px;
+            font-weight: bold;
+            color: #10B981;
+        }
+
+        .result-effect {
+            color: #666;
+            font-size: 14px;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .no-results i {
+            font-size: 64px;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #10B981;
+        }
+
+        .loading i {
+            font-size: 48px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="oel-search-container">
+        <!-- 头部 -->
+        <div class="search-header">
+            <h1>🛡️ 职业接触限值查询</h1>
+            <p>GBZ 2.1-2019 工作场所有害因素职业接触限值查询系统</p>
+        </div>
+
+        <!-- 搜索框 -->
+        <div class="search-box">
+            <div class="search-input-group">
+                <input type="text" id="searchInput" placeholder="输入化学品名称或CAS号..."
+                       onkeypress="if(event.key==='Enter') performSearch()">
+                <button class="search-btn" onclick="performSearch()">
+                    <i class="fas fa-search"></i> 搜索
+                </button>
+            </div>
+
+            <div class="search-tips">
+                <strong style="color: #666;">快速搜索：</strong>
+                <span class="tip-tag" onclick="quickSearch('氨')">氨</span>
+                <span class="tip-tag" onclick="quickSearch('苯')">苯</span>
+                <span class="tip-tag" onclick="quickSearch('甲醛')">甲醛</span>
+                <span class="tip-tag" onclick="quickSearch('硫酸')">硫酸</span>
+                <span class="tip-tag" onclick="quickSearch('一氧化碳')">一氧化碳</span>
+                <span class="tip-tag" onclick="quickSearch('7664-41-7')">CAS示例</span>
+            </div>
+        </div>
+
+        <!-- 浓度计算器 -->
+        <div class="calculator-section">
+            <h3>🧮 接触浓度评估计算器</h3>
+            <div class="calc-input-group">
+                <input type="text" id="calcChemical" placeholder="化学品名称或CAS号">
+                <input type="number" id="calcConcentration" placeholder="实测浓度 (mg/m³)" step="0.01">
+                <select id="calcType">
+                    <option value="PC_TWA">与PC-TWA比较</option>
+                    <option value="PC_STEL">与PC-STEL比较</option>
+                    <option value="MAC">与MAC比较</option>
+                </select>
+                <button onclick="calculateExposure()" style="padding: 10px 20px; background: #10B981; color: white; border: none; border-radius: 8px; cursor: pointer;">
+                    计算评估
+                </button>
+            </div>
+            <div class="calc-result" id="calcResult"></div>
+        </div>
+
+        <!-- 结果区域 -->
+        <div class="results-section" id="resultsSection">
+            <!-- 结果控制栏 -->
+            <div class="results-controls" id="resultsControls" style="display: none;">
+                <div class="results-info">
+                    找到 <strong id="resultCount">0</strong> 条结果
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" onclick="switchView('card')">
+                        <i class="fas fa-th-large"></i> 卡片视图
+                    </button>
+                    <button class="view-btn" onclick="switchView('table')">
+                        <i class="fas fa-table"></i> 表格视图
+                    </button>
+                </div>
+            </div>
+
+            <!-- 卡片视图 -->
+            <div class="card-view" id="cardView">
+                <div id="resultsList"></div>
+            </div>
+
+            <!-- 表格视图 -->
+            <div class="table-view" id="tableView">
+                <table class="oel-table">
+                    <thead>
+                        <tr>
+                            <th width="50">序号</th>
+                            <th width="120">中文名</th>
+                            <th width="150">英文名</th>
+                            <th width="100">化学文摘号<br>CAS号</th>
+                            <th colspan="3">OELs<br>mg/m³</th>
+                            <th width="200">临界不良健康效应</th>
+                            <th width="60">备注</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th width="80">MAC</th>
+                            <th width="80">PC-TWA</th>
+                            <th width="80">PC-STEL</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableResults">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入依赖 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="js/oel-database.js"></script>
+
+    <script>
+        let currentResults = [];
+        let currentView = 'card';
+
+        // 执行搜索
+        async function performSearch() {
+            const keyword = document.getElementById('searchInput').value.trim();
+
+            if (!keyword) {
+                alert('请输入搜索关键词');
+                return;
+            }
+
+            const resultsSection = document.getElementById('resultsSection');
+            const resultsList = document.getElementById('resultsList');
+
+            // 显示加载状态
+            resultsSection.classList.add('show');
+            resultsList.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i><p>正在搜索...</p></div>';
+
+            try {
+                // 等待数据库初始化
+                await window.oelDB.init();
+
+                // 执行搜索
+                const results = await window.oelDB.search(keyword);
+                currentResults = results;
+
+                // 显示结果
+                displayResults(results);
+
+            } catch (error) {
+                console.error('搜索失败:', error);
+                resultsList.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>搜索失败：${error.message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // 切换视图
+        function switchView(viewType) {
+            currentView = viewType;
+
+            // 更新按钮状态
+            document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // 切换视图显示
+            const cardView = document.getElementById('cardView');
+            const tableView = document.getElementById('tableView');
+
+            if (viewType === 'table') {
+                cardView.classList.add('hidden');
+                tableView.classList.add('active');
+                displayTableResults(currentResults);
+            } else {
+                cardView.classList.remove('hidden');
+                tableView.classList.remove('active');
+                displayCardResults(currentResults);
+            }
+        }
+
+        // 显示结果（统一入口）
+        function displayResults(results) {
+            const resultsControls = document.getElementById('resultsControls');
+            const resultCount = document.getElementById('resultCount');
+
+            if (results.length === 0) {
+                resultsControls.style.display = 'none';
+                document.getElementById('resultsList').innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <p>未找到匹配的化学品</p>
+                        <p style="font-size: 14px; margin-top: 10px;">请尝试使用其他关键词或CAS号搜索</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // 显示控制栏
+            resultsControls.style.display = 'flex';
+            resultCount.textContent = results.length;
+
+            // 根据当前视图模式显示结果
+            if (currentView === 'table') {
+                displayTableResults(results);
+            } else {
+                displayCardResults(results);
+            }
+        }
+
+        // 表格视图显示
+        function displayTableResults(results) {
+            const tableResults = document.getElementById('tableResults');
+
+            tableResults.innerHTML = results.map((chemical, index) => {
+                // 生成备注信息
+                const badges = [];
+                if (chemical.carcinogenClass) badges.push(chemical.carcinogenClass);
+                if (chemical.skinAbsorption) badges.push('皮');
+                if (chemical.sensitization) badges.push('敏');
+
+                const notes = badges.length > 0 ? badges.join('、') : '—';
+
+                return `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td class="text-left chemical-name">${chemical.chineseName || '—'}</td>
+                        <td class="text-left">${chemical.englishName || '—'}</td>
+                        <td class="cas-number">${chemical.casNumber || '—'}</td>
+                        <td class="${chemical.MAC !== null ? 'limit-value' : 'no-value'}">
+                            ${chemical.MAC !== null ? chemical.MAC : '—'}
+                        </td>
+                        <td class="${chemical.PC_TWA !== null ? 'limit-value' : 'no-value'}">
+                            ${chemical.PC_TWA !== null ? chemical.PC_TWA : '—'}
+                        </td>
+                        <td class="${chemical.PC_STEL !== null ? 'limit-value' : 'no-value'}">
+                            ${chemical.PC_STEL !== null ? chemical.PC_STEL : '—'}
+                        </td>
+                        <td class="text-left">${chemical.healthEffect || '—'}</td>
+                        <td class="badge-cell">${notes}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 卡片视图显示（原有功能）
+        function displayCardResults(results) {
+            const resultsList = document.getElementById('resultsList');
+
+            resultsList.innerHTML = results.map(chemical => {
+                const badges = [];
+                if (chemical.carcinogenClass) {
+                    badges.push(`<span class="badge badge-carcinogen">${chemical.carcinogenClass}</span>`);
+                }
+                if (chemical.skinAbsorption) {
+                    badges.push(`<span class="badge badge-skin">皮</span>`);
+                }
+                if (chemical.sensitization) {
+                    badges.push(`<span class="badge badge-sensitive">敏</span>`);
+                }
+
+                return `
+                    <div class="result-card">
+                        <div class="result-card-header">
+                            <div class="result-name">${chemical.chineseName || '未知'}</div>
+                            <div class="result-badges">${badges.join('')}</div>
+                        </div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                            <strong>英文名：</strong>${chemical.englishName || '-'} &nbsp;|&nbsp;
+                            <strong>CAS号：</strong>${chemical.casNumber || '-'}
+                        </div>
+                        <div class="result-limits">
+                            <div class="limit-box">
+                                <div class="limit-label">最高容许浓度 (MAC)</div>
+                                <div class="limit-value">${chemical.MAC !== null ? chemical.MAC : '-'}</div>
+                            </div>
+                            <div class="limit-box">
+                                <div class="limit-label">时间加权平均 (PC-TWA)</div>
+                                <div class="limit-value">${chemical.PC_TWA !== null ? chemical.PC_TWA : '-'}</div>
+                            </div>
+                            <div class="limit-box">
+                                <div class="limit-label">短时间接触 (PC-STEL)</div>
+                                <div class="limit-value">${chemical.PC_STEL !== null ? chemical.PC_STEL : '-'}</div>
+                            </div>
+                        </div>
+                        <div class="result-effect">
+                            <strong>健康损害效应：</strong>${chemical.healthEffect || '暂无信息'}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 快速搜索
+        function quickSearch(keyword) {
+            document.getElementById('searchInput').value = keyword;
+            performSearch();
+        }
+
+        // 计算接触浓度评估
+        async function calculateExposure() {
+            const chemical = document.getElementById('calcChemical').value.trim();
+            const concentration = parseFloat(document.getElementById('calcConcentration').value);
+            const type = document.getElementById('calcType').value;
+
+            if (!chemical || isNaN(concentration)) {
+                alert('请输入完整信息');
+                return;
+            }
+
+            try {
+                await window.oelDB.init();
+
+                // 先搜索化学品
+                const results = await window.oelDB.search(chemical);
+                if (results.length === 0) {
+                    alert('未找到该化学品');
+                    return;
+                }
+
+                const chem = results[0];
+                const result = await window.oelDB.checkExposure(chem.casNumber, concentration, type);
+
+                const calcResult = document.getElementById('calcResult');
+                calcResult.style.display = 'block';
+
+                if (result.error) {
+                    calcResult.className = 'calc-result warning';
+                    calcResult.innerHTML = `<strong>⚠️ ${result.error}</strong>`;
+                    return;
+                }
+
+                const className = result.isExceeded ? 'danger' : 'safe';
+                const icon = result.isExceeded ? '❌' : '✅';
+
+                calcResult.className = `calc-result ${className}`;
+                calcResult.innerHTML = `
+                    <h4>${icon} ${result.status}</h4>
+                    <p><strong>化学品：</strong>${result.chemical}</p>
+                    <p><strong>实测浓度：</strong>${result.concentration} mg/m³</p>
+                    <p><strong>限值标准 (${type})：</strong>${result.limitValue} mg/m³</p>
+                    <p><strong>浓度占比：</strong>${result.ratio}</p>
+                    <p><strong>风险等级：</strong>${result.riskLevel}</p>
+                `;
+
+            } catch (error) {
+                alert('计算失败：' + error.message);
+            }
+        }
+
+        // 页面加载时初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await window.oelDB.init();
+                const stats = await window.oelDB.getStatistics();
+                console.log('OEL数据库统计:', stats);
+            } catch (error) {
+                console.error('数据库初始化失败:', error);
+            }
+        });
+    </script>
+</body>
+</html>

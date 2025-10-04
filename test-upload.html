@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上传测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        .test-area {
+            width: 500px;
+            height: 300px;
+            border: 3px dashed #10B981;
+            border-radius: 10px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .test-area.dragging {
+            background: #d1fae5;
+            border-color: #059669;
+        }
+        .log {
+            margin-top: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .log-item {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .success { color: green; }
+        .error { color: red; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>拖拽上传测试页面</h1>
+
+    <div class="test-area" id="testArea">
+        拖拽文件到这里或点击选择
+    </div>
+
+    <input type="file" id="fileInput" style="display: none;">
+
+    <div class="log" id="log">
+        <h3>事件日志</h3>
+    </div>
+
+    <script>
+        const testArea = document.getElementById('testArea');
+        const fileInput = document.getElementById('fileInput');
+        const logDiv = document.getElementById('log');
+
+        function addLog(message, type = 'info') {
+            const item = document.createElement('div');
+            item.className = `log-item ${type}`;
+            item.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            logDiv.appendChild(item);
+            logDiv.scrollTop = logDiv.scrollHeight;
+            console.log(message);
+        }
+
+        addLog('页面加载完成', 'success');
+
+        // 点击上传
+        testArea.addEventListener('click', () => {
+            addLog('测试区域被点击', 'info');
+            fileInput.click();
+        });
+
+        // 文件选择
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                const file = e.target.files[0];
+                addLog(`通过点击选择了文件: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`, 'success');
+            }
+        });
+
+        // 阻止默认拖拽行为
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            window.addEventListener(eventName, (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+            }, true);
+        });
+
+        addLog('全局拖拽阻止事件已绑定', 'success');
+
+        // 拖拽事件
+        testArea.addEventListener('dragenter', (e) => {
+            addLog('dragenter - 文件拖入', 'info');
+            testArea.classList.add('dragging');
+        });
+
+        testArea.addEventListener('dragover', (e) => {
+            // 这个事件会频繁触发，所以不记录日志
+        });
+
+        testArea.addEventListener('dragleave', (e) => {
+            addLog('dragleave - 文件拖出', 'info');
+            testArea.classList.remove('dragging');
+        });
+
+        testArea.addEventListener('drop', (e) => {
+            addLog('drop - 文件释放！', 'success');
+            testArea.classList.remove('dragging');
+
+            if (e.dataTransfer.files.length > 0) {
+                const file = e.dataTransfer.files[0];
+                addLog(`成功获取文件: ${file.name} (${(file.size/1024/1024).toFixed(2)}MB)`, 'success');
+                addLog(`文件类型: ${file.type}`, 'info');
+            } else {
+                addLog('未检测到文件', 'error');
+            }
+        });
+
+        addLog('所有事件监听器已绑定', 'success');
+    </script>
+</body>
+</html>
